@@ -1,9 +1,13 @@
 package br.com.eduardodornelles.infogoods.controller;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import br.com.eduardodornelles.infogoods.dto.HttpResponseDTO;
 
 @RestController
 @RequestMapping("/api/usuarios")
@@ -18,8 +22,11 @@ public class UserController extends AbstractController {
 	 */
 	@RequestMapping(method = RequestMethod.GET)
 	@ResponseBody
-	public String Test()
+	public ResponseEntity<HttpResponseDTO> Test()
 			throws Exception {
-		return "ACHOU";
+		HttpResponseDTO resposta = new HttpResponseDTO();
+		resposta.setSuccess(true);
+		resposta.addContent("valor", "teste");
+		return super.response(resposta, HttpStatus.OK);
 	}
 }
