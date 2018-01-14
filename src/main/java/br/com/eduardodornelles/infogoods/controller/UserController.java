@@ -22,11 +22,19 @@ public class UserController extends AbstractController {
 	 */
 	@RequestMapping(method = RequestMethod.GET)
 	@ResponseBody
-	public ResponseEntity<HttpResponseDTO> Test()
-			throws Exception {
+	public ResponseEntity<HttpResponseDTO> Test() throws Exception {
 		HttpResponseDTO resposta = new HttpResponseDTO();
 		resposta.setSuccess(true);
 		resposta.addContent("valor", "teste");
 		return super.response(resposta, HttpStatus.OK);
 	}
+
+	@RequestMapping("/users")
+	@ResponseBody
+	public String getUsers() {
+		return "{\"users\":[{\"name\":\"Lucas\", \"country\":\"Brazil\"},"
+				+ "{\"name\":\"Jackie\",\"country\":\"China\"}]}";
+
+	}
+	
 }
