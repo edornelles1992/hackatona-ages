@@ -3,11 +3,12 @@ package br.com.eduardodornelles.infogoods.dao;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.CrudRepository;
 
-import br.com.eduardodornelles.infogoods.entity.UserRegistry;
+import br.com.eduardodornelles.infogoods.entity.User;
 
-public interface UserDao extends CrudRepository<UserRegistry, Long>, JpaSpecificationExecutor<UserRegistry>{
+public interface UserDao extends CrudRepository<User, Long>, JpaSpecificationExecutor<User>{
 	
-	UserRegistry findByEmail(String email);
+	User findByEmail(String email);
 	
-	UserRegistry findById_pessoa(Long id_pessoa);
+	User findByEmailAndSenha(String email, String password);
+	
 }
