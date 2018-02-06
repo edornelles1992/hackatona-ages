@@ -10,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,21 +24,23 @@ public class User implements Serializable, UserDetails {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "id_pessoa")
-	Long id_pessoa;
+	Long id;
 	String estado;
 	String rua;
 	String numero;
 	String cidade;
 	String nome;
-	Date data_nascimento;
+	@Column(name = "data_nascimento")
+	@Temporal(TemporalType.DATE)
+	Date dataNascimento;
 	String email;
 	String senha;
 		
-	public Long getId_pessoa() {
-		return id_pessoa;
+	public Long getId() {
+		return id;
 	}
-	public void setId_pessoa(Long id_pessoa) {
-		this.id_pessoa = id_pessoa;
+	public void setId(Long id) {
+		this.id = id;
 	}
 	public String getEstado() {
 		return estado;
@@ -68,11 +72,11 @@ public class User implements Serializable, UserDetails {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public Date getData_nascimento() {
-		return data_nascimento;
+	public Date getDataNascimento() {
+		return dataNascimento;
 	}
-	public void setData_nascimento(Date data_nascimento) {
-		this.data_nascimento = data_nascimento;
+	public void setDataNascimento(Date dataNascimento) {
+		this.dataNascimento = dataNascimento;
 	}
 	public String getEmail() {
 		return email;

@@ -1,5 +1,6 @@
 package br.com.eduardodornelles.infogoods;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -18,5 +19,13 @@ public class Boot
    public BCryptPasswordEncoder bCryptPasswordEncoder() {
        return new BCryptPasswordEncoder();
    }
- 
+   /**
+    * bean to instantiate the ModelMapper to application.
+    * @return
+    */
+   @Bean
+   public ModelMapper modelMapper() {
+	   return new ModelMapper();
+   }
+
 }

@@ -86,3 +86,8 @@ VALUES('Bom produto, porém gasta muita energia!', NOW(), 0, 3,4);
 INSERT INTO info_goods.T_COMENTARIO
 (comentario, data_comentario, curtidas, id_pessoa, id_publicacao)
 VALUES('Muita propaganda e baixa qualidade!', NOW(), 0, 3,1);
+
+/* MENSAGENS */
+
+INSERT INTO T_MENSAGEM (cod_mensagem, mensagem) 
+VALUES ('A001', 'Usuário não encontrado.');
