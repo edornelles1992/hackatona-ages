@@ -91,3 +91,9 @@ VALUES('Muita propaganda e baixa qualidade!', NOW(), 0, 3,1);
 
 INSERT INTO T_MENSAGEM (cod_mensagem, mensagem) 
 VALUES ('A001', 'Usuário não encontrado.');
+
+INSERT INTO T_MENSAGEM (cod_mensagem, mensagem) 
+values ('A002', 'Conta criada com sucesso.');
+
+INSERT INTO T_MENSAGEM (cod_mensagem, mensagem) 
+values ('A003', 'Erro ao criar a conta.');
