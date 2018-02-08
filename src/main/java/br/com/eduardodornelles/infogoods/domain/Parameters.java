@@ -12,7 +12,7 @@ public interface Parameters {
 	public static final int PASSWORD_MIN_SIZE = 6;
 	
 	/**
-	 * String to return validations indicating sucess
+	 * {@literal String to return validations indicating success.}
 	 */
 	public static final String AUTHORIZED = "authorized";
 	

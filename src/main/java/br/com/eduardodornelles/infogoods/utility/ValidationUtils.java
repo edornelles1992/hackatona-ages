@@ -10,7 +10,7 @@ import br.com.eduardodornelles.infogoods.service.MessageService;
 /**
  * class containing validations that are used through the application
  * 
- * @author eduardo
+ * @author Eduardo Dornelles
  *
  */
 public class ValidationUtils {	
