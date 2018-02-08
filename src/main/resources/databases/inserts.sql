@@ -21,19 +21,19 @@ VALUES('Salvador', 'Bahia', 'João Ricardo', '1997-08-21', 'joaoricardo2@hotmail
 
 INSERT INTO info_goods.T_PRODUTO
 (fabricante, nome, foto, foto1, foto2, foto3, modelo, nota)
-VALUES('Panasonic', 'Barbeador X29', '', '', '', '', '', 0);
+VALUES('Panasonic', 'Barbeador X29', '', '', '', '', 'A520BC', 0);
 
 INSERT INTO info_goods.T_PRODUTO
 (fabricante, nome, foto, foto1, foto2, foto3, modelo, nota)
-VALUES('Brastemp', 'Geladeira F203', '', '', '', '', '', 0);
+VALUES('Brastemp', 'Geladeira F203', '', '', '', '', 'XX20XS', 0);
 
 INSERT INTO info_goods.T_PRODUTO
 (fabricante, nome, foto, foto1, foto2, foto3, modelo, nota)
-VALUES('Castor', 'Colchão King B20', '', '', '', '', '', 0);
+VALUES('Castor', 'Colchão King B20', '', '', '', '', 'MOB23', 0);
 
 INSERT INTO info_goods.T_PRODUTO
 (fabricante, nome, foto, foto1, foto2, foto3, modelo, nota)
-VALUES('Dell', 'Notebook Special 15R', '', '', '', '', '', 0);
+VALUES('Dell', 'Notebook Special 15R', '', '', '', '', 'AL22F', 0);
 
 /* POSTAGEM */
 
