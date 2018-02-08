@@ -6,8 +6,6 @@ public class UserDTO {
 
 	Long id;
 	String estado;
-	String rua;
-	String numero;
 	String cidade;
 	String nome;
 	Date dataNascimento;
@@ -24,19 +22,7 @@ public class UserDTO {
 	}
 	public void setEstado(String estado) {
 		this.estado = estado;
-	}
-	public String getRua() {
-		return rua;
-	}
-	public void setRua(String rua) {
-		this.rua = rua;
-	}
-	public String getNumero() {
-		return numero;
-	}
-	public void setNumero(String numero) {
-		this.numero = numero;
-	}
+	}	
 	public String getCidade() {
 		return cidade;
 	}

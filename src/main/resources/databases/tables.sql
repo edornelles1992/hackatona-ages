@@ -1,10 +1,8 @@
 
 
 CREATE TABLE T_PESSOA (
-id_pessoa INT(20) not null AUTO_INCREMENT PRIMARY KEY ,
+id_pessoa INT(20) not null AUTO_INCREMENT PRIMARY KEY,
 estado VARCHAR(30) not null,
-rua VARCHAR(50),
-numero VARCHAR(10),
 cidade VARCHAR(50),
 nome VARCHAR(50)not null,
 data_nascimento DATETIME,

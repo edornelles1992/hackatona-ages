@@ -24,17 +24,21 @@ public class User implements Serializable, UserDetails {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "id_pessoa")
-	Long id;
-	String estado;
-	String rua;
-	String numero;
-	String cidade;
-	String nome;
+	private Long id;
+	
+	private String estado;
+	
+	private String cidade;
+	
+	private String nome;
+	
 	@Column(name = "data_nascimento")
 	@Temporal(TemporalType.DATE)
-	Date dataNascimento;
-	String email;
-	String senha;
+	private Date dataNascimento;
+	
+	private String email;
+	
+	private String senha;
 		
 	public Long getId() {
 		return id;
@@ -47,19 +51,7 @@ public class User implements Serializable, UserDetails {
 	}
 	public void setEstado(String estado) {
 		this.estado = estado;
-	}
-	public String getRua() {
-		return rua;
-	}
-	public void setRua(String rua) {
-		this.rua = rua;
-	}
-	public String getNumero() {
-		return numero;
-	}
-	public void setNumero(String numero) {
-		this.numero = numero;
-	}
+	}	
 	public String getCidade() {
 		return cidade;
 	}
