@@ -8,7 +8,7 @@ import br.com.eduardodornelles.infogoods.service.ProductService;
 
 @RestController
 @RequestMapping("/api/produtos")
-public class ProductController {
+public class ProductController extends AbstractController {
 
 	@Autowired
 	private ProductService productService;

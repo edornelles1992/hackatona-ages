@@ -38,20 +38,20 @@ VALUES('Dell', 'Notebook Special 15R', '', '', '', '', 'AL22F', 0);
 /* POSTAGEM */
 
 INSERT INTO info_goods.T_POSTAGEM
-(data_publicacao, id_pessoa, id_produto)
-VALUES(NOW(), 1, 1);
+(data_publicacao, id_pessoa, id_produto,curtida)
+VALUES(NOW(), 1, 1,5);
 
 INSERT INTO info_goods.T_POSTAGEM
-(data_publicacao, id_pessoa, id_produto)
-VALUES(NOW(), 2, 2);
+(data_publicacao, id_pessoa, id_produto,curtida)
+VALUES(NOW(), 2, 2,10);
 
 INSERT INTO info_goods.T_POSTAGEM
-(data_publicacao, id_pessoa, id_produto)
-VALUES(NOW(), 1, 3);
+(data_publicacao, id_pessoa, id_produto,curtida)
+VALUES(NOW(), 1, 3,12);
 
 INSERT INTO info_goods.T_POSTAGEM
-(data_publicacao, id_pessoa, id_produto)
-VALUES(NOW(), 4, 4);
+(data_publicacao, id_pessoa, id_produto,curtida)
+VALUES(NOW(), 4, 4,30);
 
 /* COMENTARIO */
 

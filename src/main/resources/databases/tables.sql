@@ -24,6 +24,7 @@ data_publicacao DATETIME not null,
 id_publicacao INT(20) not null AUTO_INCREMENT PRIMARY KEY,
 id_pessoa INT(20) not null,
 id_produto INT(20) not null,
+curtidas INT(20)
 FOREIGN KEY(id_pessoa) REFERENCES T_PESSOA (id_pessoa)
 )
 

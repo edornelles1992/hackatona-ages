@@ -8,7 +8,7 @@ import br.com.eduardodornelles.infogoods.service.CommentService;
 
 @RestController
 @RequestMapping("/api/comentarios")
-public class CommentController {
+public class CommentController extends AbstractController {
 
 	@Autowired
 	private CommentService commentService;

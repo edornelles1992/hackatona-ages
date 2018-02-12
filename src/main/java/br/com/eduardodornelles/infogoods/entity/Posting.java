@@ -1,11 +1,18 @@
 package br.com.eduardodornelles.infogoods.entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "T_POSTAGEM")
@@ -16,11 +23,51 @@ public class Posting {
 	@Column(name = "id_publicacao")
 	private Long id;
 	
-	@Column(name = "id_pessoa")
-	private Long idPessoa;
+	private Long curtidas;	
 	
-	@Column(name = "id_produto")
-	private Long idProduto;
+	@ManyToOne
+    @JoinColumn(name="id_produto")
+	private Product produto;
+	
+	@OneToOne
+	@JoinColumn(name="id_pessoa")
+	private User user; 
+	
+	@Column(name = "data_publicacao")
+	@Temporal(TemporalType.DATE)
+	private Date dataPublicacao;
+
+	public Date getDataPublicacao() {
+		return dataPublicacao;
+	}
+
+	public void setDataPublicacao(Date dataPublicacao) {
+		this.dataPublicacao = dataPublicacao;
+	}
+
+	public Product getProduto() {
+		return produto;
+	}
+
+	public void setProduto(Product produto) {
+		this.produto = produto;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Long getCurtidas() {
+		return curtidas;
+	}
+
+	public void setCurtidas(Long curtidas) {
+		this.curtidas = curtidas;
+	}
 
 	public Long getId() {
 		return id;
@@ -28,22 +75,6 @@ public class Posting {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Long getIdPessoa() {
-		return idPessoa;
-	}
-
-	public void setIdPessoa(Long idPessoa) {
-		this.idPessoa = idPessoa;
-	}
-
-	public Long getIdProduto() {
-		return idProduto;
-	}
-
-	public void setIdProduto(Long idProduto) {
-		this.idProduto = idProduto;
 	}
 
 }

@@ -1,35 +1,57 @@
 package br.com.eduardodornelles.infogoods.dto;
 
+import java.util.Date;
+
 public class PostingDTO {
 	
 	private Long id;
 		
-	private Long idPessoa;
+	private UserDTO User;
 		
-	private Long idProduto;
+	private ProductDTO Produto;
+	
+	private Long curtidas;	
+	
+	private Date dataPublicacao;
+
+	public Date getDataPublicacao() {
+		return dataPublicacao;
+	}
+
+	public void setDataPublicacao(Date dataPublicacao) {
+		this.dataPublicacao = dataPublicacao;
+	}
+
+	public Long getCurtidas() {
+		return curtidas;
+	}
+
+	public void setCurtidas(Long curtidas) {
+		this.curtidas = curtidas;
+	}
 
 	public Long getId() {
 		return id;
 	}
 
+	public UserDTO getUser() {
+		return User;
+	}
+
+	public void setUser(UserDTO user) {
+		User = user;
+	}
+
+	public ProductDTO getProduto() {
+		return Produto;
+	}
+
+	public void setProduto(ProductDTO produto) {
+		Produto = produto;
+	}
+
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public Long getIdPessoa() {
-		return idPessoa;
-	}
-
-	public void setIdPessoa(Long idPessoa) {
-		this.idPessoa = idPessoa;
-	}
-
-	public Long getIdProduto() {
-		return idProduto;
-	}
-
-	public void setIdProduto(Long idProduto) {
-		this.idProduto = idProduto;
 	}
 
 }
