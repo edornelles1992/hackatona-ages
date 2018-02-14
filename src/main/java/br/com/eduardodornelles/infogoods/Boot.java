@@ -4,7 +4,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @SpringBootApplication
 public class Boot
@@ -15,10 +14,7 @@ public class Boot
       SpringApplication.run(Boot.class, args);
    }
    
-   @Bean
-   public BCryptPasswordEncoder bCryptPasswordEncoder() {
-       return new BCryptPasswordEncoder();
-   }
+	
    /**
     * bean to instantiate the ModelMapper to application.
     * @return

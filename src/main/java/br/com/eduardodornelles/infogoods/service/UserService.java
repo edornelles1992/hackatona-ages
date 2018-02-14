@@ -19,8 +19,7 @@ import br.com.eduardodornelles.infogoods.utility.ValidationUtils;
 @Service
 public class UserService extends AbstractService {
 
-	@Autowired
-	private BCryptPasswordEncoder bCryptPasswordEncoder;
+
 
 	/**
 	 * retrieve a user from database based on its email and password.
@@ -56,8 +55,7 @@ public class UserService extends AbstractService {
 		HttpResponseDTO response = new HttpResponseDTO();
 		String errorMessage = ValidationUtils.validateUserFields(user);
 
-		if (errorMessage.equals(Parameters.AUTHORIZED)) {
-			user.setSenha(bCryptPasswordEncoder.encode(user.getSenha()));
+		if (errorMessage.equals(Parameters.AUTHORIZED)) {			
 			userDao.save(user);
 			response.setSuccess(true);
 			response.addMessage(this.messageService.getMessageDTOByCode(Messages.A002));
