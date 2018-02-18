@@ -16,6 +16,8 @@ import javax.persistence.TemporalType;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "T_PESSOA")
 public class User implements Serializable, UserDetails {
@@ -34,6 +36,7 @@ public class User implements Serializable, UserDetails {
 	
 	@Column(name = "data_nascimento")
 	@Temporal(TemporalType.DATE)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	private Date dataNascimento;
 	
 	private String email;
