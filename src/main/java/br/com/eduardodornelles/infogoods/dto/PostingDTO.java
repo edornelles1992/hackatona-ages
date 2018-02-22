@@ -6,9 +6,9 @@ public class PostingDTO {
 	
 	private Long id;
 		
-	private UserDTO User;
+	private UserDTO user;
 		
-	private ProductDTO Produto;
+	private ProductDTO produto;
 	
 	private Long curtidas;	
 	
@@ -35,19 +35,19 @@ public class PostingDTO {
 	}
 
 	public UserDTO getUser() {
-		return User;
+		return user;
 	}
 
 	public void setUser(UserDTO user) {
-		User = user;
+		this.user = user;
 	}
 
 	public ProductDTO getProduto() {
-		return Produto;
+		return produto;
 	}
 
 	public void setProduto(ProductDTO produto) {
-		Produto = produto;
+		this.produto = produto;
 	}
 
 	public void setId(Long id) {
