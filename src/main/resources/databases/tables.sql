@@ -37,7 +37,7 @@ foto2 VARCHAR(500),
 foto3 VARCHAR(500),
 id_produto INT(20)  not null AUTO_INCREMENT PRIMARY KEY,
 modelo VARCHAR(30),
-nota DECIMAL(10)
+nota DECIMAL(10,2)
 )
 
 CREATE TABLE T_MENSAGEM (
