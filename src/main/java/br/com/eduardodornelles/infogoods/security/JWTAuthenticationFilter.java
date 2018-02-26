@@ -52,9 +52,9 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 	@Override
 	protected void successfulAuthentication(HttpServletRequest req, HttpServletResponse res, FilterChain chain,
 			Authentication auth) throws IOException, ServletException {
-
+		// PARA POR DEVOLTA EXPIRACAO DO TOKEN - > setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
 		String token = Jwts.builder().setSubject(((User) auth.getPrincipal()).getEmail())
-				.setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME)).signWith(SignatureAlgorithm.HS512, SECRET.getBytes()).compact();
+				.signWith(SignatureAlgorithm.HS512, SECRET.getBytes()).compact();
 		res.addHeader(HEADER_STRING, TOKEN_PREFIX + token);
 	}	
 	

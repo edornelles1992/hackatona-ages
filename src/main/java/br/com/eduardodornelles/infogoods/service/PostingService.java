@@ -9,8 +9,6 @@ import org.springframework.stereotype.Service;
 
 import br.com.eduardodornelles.infogoods.dto.HttpResponseDTO;
 import br.com.eduardodornelles.infogoods.dto.PostingDTO;
-import br.com.eduardodornelles.infogoods.dto.ProductDTO;
-import br.com.eduardodornelles.infogoods.dto.UserDTO;
 import br.com.eduardodornelles.infogoods.entity.Posting;
 
 /**
@@ -60,6 +58,23 @@ public class PostingService extends AbstractService {
 		
 		}		
 		return postingsDTOs;
+	}
+
+	/**
+	 * method that return a lists of posts that
+	 * the searchTerm corresponding with the 
+	 * product name of the posts. return a 
+	 * empty list if no postings was found
+	 * @return HttpResponseDTO response
+	 */
+	public HttpResponseDTO getPostsByTerm(String searchTerm) {
+		HttpResponseDTO response = new HttpResponseDTO();
+		response.setSuccess(true);		
+		
+		Collection<Posting> postings = postingDao.findBySearchTermInProductName(searchTerm);		
+		response.addContent("postings", postings);
+		
+		return response;
 	}
 
 }
