@@ -33,15 +33,13 @@ public class PostingService extends AbstractService {
 		
 		if (postings != null) {
 			if (postings.size() > 0)
-				postings = postings.stream().sorted(Comparator.comparing(Posting::getCurtidas).reversed())
-						.collect(Collectors.toList());
-			
+				postings = sortByLikes(postings);			
 			postingsDTOs = convertPostingsListToDTOs(postings);
 		}			
 		
 		response.addContent("postings", postingsDTOs);
 		return response;
-	}
+	}	
 	
 	/**
 	 * method to pass a list of entity posts to a 
@@ -59,6 +57,18 @@ public class PostingService extends AbstractService {
 		}		
 		return postingsDTOs;
 	}
+	
+	/**
+	 * method that receive a collections of postings
+	 * and sort by quantity of likes likes
+	 * @param postings
+	 * @return
+	 */
+	private Collection<Posting> sortByLikes(Collection<Posting> postings) {
+		postings = postings.stream().sorted(Comparator.comparing(Posting::getCurtidas).reversed())
+				.collect(Collectors.toList());
+		return postings;
+	}
 
 	/**
 	 * method that return a lists of posts that
@@ -69,10 +79,16 @@ public class PostingService extends AbstractService {
 	 */
 	public HttpResponseDTO getPostsByTerm(String searchTerm) {
 		HttpResponseDTO response = new HttpResponseDTO();
-		response.setSuccess(true);		
+		response.setSuccess(true);
+		ArrayList<PostingDTO> postingsDTOs = new ArrayList<PostingDTO>();
 		
-		Collection<Posting> postings = postingDao.findBySearchTermInProductName(searchTerm);		
-		response.addContent("postings", postings);
+		Collection<Posting> postings = postingDao.findBySearchTermInProductName(searchTerm);
+		
+		if(postings.size()>1)
+		postings = sortByLikes(postings);
+		
+		postingsDTOs = convertPostingsListToDTOs(postings);
+		response.addContent("postings", postingsDTOs);
 		
 		return response;
 	}
