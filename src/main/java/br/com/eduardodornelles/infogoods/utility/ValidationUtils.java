@@ -10,7 +10,7 @@ import br.com.eduardodornelles.infogoods.service.MessageService;
 
 /**
  * class containing validations that are used through the application
- * 
+ *  
  * @author Eduardo Dornelles
  *
  */
@@ -42,9 +42,35 @@ public class ValidationUtils {
 		return Parameters.AUTHORIZED;
 	}
 	
-	public static boolean validatePostFields(PostingDTO postingDTO) throws Exception{
+	/**
+	 * validating if any field inside the object is null
+	 * throw a NullPointerException if exists.
+	 * @param postingDTO
+	 * @return boolean
+	 * @throws NullPointerException
+	 */
+	public static boolean validateEmptyPostFields(PostingDTO postingDTO) throws NullPointerException{
 		
-		if (postingDTO == null) throw new Exception();
+		if (postingDTO == null) throw new NullPointerException();
+		if (postingDTO.getCurtidas() == null) throw new NullPointerException();
+		if (postingDTO.getDataPublicacao() == null) throw new NullPointerException();
+		if (postingDTO.getId() == null) throw new NullPointerException();
+		if (postingDTO.getProduto() == null) throw new NullPointerException();
+		if (postingDTO.getUser() == null) throw new NullPointerException();
+		
+		if (postingDTO.getProduto().getFabricante() == null) throw new NullPointerException();
+		if (postingDTO.getProduto().getFoto() == null) throw new NullPointerException();
+		if (postingDTO.getProduto().getId() == null) throw new NullPointerException();
+		if (postingDTO.getProduto().getModelo() == null) throw new NullPointerException();
+		if (postingDTO.getProduto().getNome() == null) throw new NullPointerException();
+		if (postingDTO.getProduto().getNota() == null) throw new NullPointerException();
+		
+		if (postingDTO.getUser().getCidade()== null) throw new NullPointerException();
+		if (postingDTO.getUser().getDataNascimento()== null) throw new NullPointerException();
+		if (postingDTO.getUser().getEmail()== null) throw new NullPointerException();
+		if (postingDTO.getUser().getEstado()== null) throw new NullPointerException();
+		if (postingDTO.getUser().getId()== null) throw new NullPointerException();
+		if (postingDTO.getUser().getNome()== null) throw new NullPointerException();		
 		
 		return true;
 	}

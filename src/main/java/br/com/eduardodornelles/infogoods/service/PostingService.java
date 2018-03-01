@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import br.com.eduardodornelles.infogoods.dto.HttpResponseDTO;
 import br.com.eduardodornelles.infogoods.dto.PostingDTO;
 import br.com.eduardodornelles.infogoods.entity.Posting;
+import br.com.eduardodornelles.infogoods.utility.ValidationUtils;
 
 /**
  * class that have method related to services concerning Postings
@@ -98,7 +99,8 @@ public class PostingService extends AbstractService {
 
 	/**
 	 * method to create a post. may launch an exception
-	 * if some parameter in object is null  
+	 * if some parameter in object is null the validate method 
+	 * validateEmptyPostFields throws an NullPointerException.
 	 * @param postingDTO
 	 * @return HttpResponseDTO response
 	 */
@@ -107,11 +109,14 @@ public class PostingService extends AbstractService {
 		HttpResponseDTO response = new HttpResponseDTO();
 		response.setSuccess(true);
 
-		try {
-			
-			
+		try {			
+			ValidationUtils.validateEmptyPostFields(postingDTO);
 		
+			
 
+		} catch (NullPointerException e) {
+			response.addMessage("Parametros recebidos são inválidos.");
+			response.setSuccess(false);
 		} catch (Exception e) {
 			response.addMessage("Erro Inesperado ao criar Postagem.");
 			response.setSuccess(false);
