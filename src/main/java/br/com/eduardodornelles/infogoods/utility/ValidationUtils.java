@@ -4,6 +4,7 @@ import org.apache.commons.validator.routines.EmailValidator;
 
 import br.com.eduardodornelles.infogoods.domain.Messages;
 import br.com.eduardodornelles.infogoods.domain.Parameters;
+import br.com.eduardodornelles.infogoods.dto.PostingDTO;
 import br.com.eduardodornelles.infogoods.entity.User;
 import br.com.eduardodornelles.infogoods.service.MessageService;
 
@@ -41,5 +42,11 @@ public class ValidationUtils {
 		return Parameters.AUTHORIZED;
 	}
 	
+	public static boolean validatePostFields(PostingDTO postingDTO) throws Exception{
+		
+		if (postingDTO == null) throw new Exception();
+		
+		return true;
+	}
 	
 }

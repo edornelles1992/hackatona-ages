@@ -1,7 +1,5 @@
 package br.com.eduardodornelles.infogoods.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import br.com.eduardodornelles.infogoods.domain.Messages;
@@ -29,6 +27,7 @@ public class UserService extends AbstractService {
 	 * @return HttpResponseDTO response
 	 */
 	public HttpResponseDTO getUser(final String email, final String password) {
+		this.LogServiceConsumed(this.getClassName(), "getUser");
 		HttpResponseDTO response = new HttpResponseDTO();
 
 		User user = userDao.findByEmailAndSenha(email, password);
@@ -52,6 +51,7 @@ public class UserService extends AbstractService {
 	 * @return HttpResponseDTO response
 	 */
 	public HttpResponseDTO registerUser(final User user) {
+		this.LogServiceConsumed(this.getClassName(), "registerUser");
 		HttpResponseDTO response = new HttpResponseDTO();
 		String errorMessage = ValidationUtils.validateUserFields(user);
 

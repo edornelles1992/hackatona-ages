@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.eduardodornelles.infogoods.dto.HttpResponseDTO;
+import br.com.eduardodornelles.infogoods.dto.PostingDTO;
 import br.com.eduardodornelles.infogoods.service.PostingService;
 
 @RestController
@@ -40,5 +41,17 @@ public class PostingController extends AbstractController {
 	@ResponseBody
 	public ResponseEntity<HttpResponseDTO> findPostsByTerm(@RequestParam(value = "searchTerm") String searchTerm) throws Exception{		
 		return super.response(postingService.getPostsByTerm(searchTerm), HttpStatus.OK);
+	}
+	
+	/**
+	 * RESTful method that receive a PostingDTO to create a new 
+	 * Post.
+	 * @return {@link ResponseEntity<HttpResponseDTO>}
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/adicionar", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<HttpResponseDTO> createPost(@RequestParam(value = "postingDTO") PostingDTO postingDTO) throws Exception{		
+		return super.response(postingService.addPost(postingDTO), HttpStatus.OK);
 	}
 }
