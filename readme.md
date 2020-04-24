@@ -1,6 +1,5 @@
-#Some setup information :).
+Projeto Back-end para o exercicio Proposto na aula de Projeto e Arquitetura de banco de dados - PUCRS/2020
 
-##Spring JPA Setup
-You need to change the **application.properties** and configure the login, password and url of your database. 
+Criado um protótipo inicial de uma Rest API em MVC, com Spring Boot, que será consumida pelo Front-End do Caixa (Onde estarão as Views)
   	
 
