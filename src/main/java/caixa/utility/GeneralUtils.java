@@ -17,6 +17,8 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.springframework.util.StringUtils;
 
+import caixa.dto.PaymentDTO;
+
 
 
 /**
@@ -196,5 +198,20 @@ public class GeneralUtils {
 		gc.setTime(from);
 		return DatatypeFactory.newInstance().newXMLGregorianCalendar(gc);
 
+	}
+	
+	public static BigDecimal totalizaValoresPagos() {
+		//Totaliza os valores pagos nas compras do dia na hora do fechamento
+		return null;
+	}
+	
+	public static BigDecimal pagamentoDinheiro(PaymentDTO dto) {
+		//Realiza pagamento em dinheiro
+		return null;
+	}
+	
+	public static BigDecimal pagamentoCartao(PaymentDTO dto) {
+		//Realiza pagamento em cartão
+		return null;
 	}
 }
