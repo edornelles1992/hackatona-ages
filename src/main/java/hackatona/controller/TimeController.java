@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import hackatona.dto.HttpResponseDTO;
 import hackatona.dto.TimeDTO;
-import hackatona.service.TimeService;
+import hackatona.service.logic.TimeService;
 
 @RestController
 @RequestMapping("/api/time")
@@ -47,8 +47,8 @@ public class TimeController extends AbstractController {
 	
 	@RequestMapping(value = "/adicionar_aluno", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<HttpResponseDTO> adicionarIntegrante(@RequestParam Long id) throws Exception {
-		return super.response(timeService.adicionarAluno(id), HttpStatus.OK);
+	public ResponseEntity<HttpResponseDTO> adicionarIntegrante(@RequestParam Long idAluno, @RequestParam Long idTime) throws Exception {
+		return super.response(timeService.adicionarAluno(idTime, idTime), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/remover_aluno", method = RequestMethod.DELETE)

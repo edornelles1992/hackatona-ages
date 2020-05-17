@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import hackatona.dto.HttpResponseDTO;
 import hackatona.model.User;
-import hackatona.service.UserService;
+import hackatona.service.logic.UserService;
 
 @RestController
 @RequestMapping("/api/usuario")

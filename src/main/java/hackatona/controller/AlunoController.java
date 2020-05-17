@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import hackatona.dto.AlunoDTO;
 import hackatona.dto.HttpResponseDTO;
-import hackatona.service.AlunoService;
+import hackatona.service.logic.AlunoService;
 
 @RestController
 @RequestMapping("/api/aluno")

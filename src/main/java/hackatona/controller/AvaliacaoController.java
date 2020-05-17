@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import hackatona.dto.AvaliacaoDTO;
 import hackatona.dto.HttpResponseDTO;
-import hackatona.service.AvaliacaoService;
+import hackatona.service.logic.AvaliacaoService;
 
 @RestController
 @RequestMapping("/api/avaliacao")
@@ -50,7 +50,7 @@ public class AvaliacaoController extends AbstractController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	@ResponseBody
-	public ResponseEntity<HttpResponseDTO> buscarAvaliacao(Long id) {
+	public ResponseEntity<HttpResponseDTO> buscarAvaliacao(Long id) throws Exception {
 		return super.response(avaliacaoService.buscarAvaliacao(id), HttpStatus.OK);
 	}
 	

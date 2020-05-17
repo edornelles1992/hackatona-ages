@@ -1,4 +1,4 @@
-package hackatona.service;
+package hackatona.service.logic;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

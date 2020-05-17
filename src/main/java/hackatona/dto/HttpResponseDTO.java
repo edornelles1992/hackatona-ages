@@ -256,6 +256,14 @@ public class HttpResponseDTO {
 		return response;
 	}
 	
+	public static HttpResponseDTO fail(final String message) {
+		final HttpResponseDTO response = new HttpResponseDTO();
+		response.addMessage(message);
+		response.setSuccess(Boolean.FALSE);
+		response.setStatus(HttpStatus.NOT_ACCEPTABLE);
+		return response;
+	}
+	
 	/**
 	 * Fail response with message by code and message
 	 *
@@ -307,6 +315,14 @@ public class HttpResponseDTO {
 		final HttpResponseDTO response = new HttpResponseDTO();
 		response.setSuccess(Boolean.TRUE);
 		response.addContent(content);
+		response.setStatus(HttpStatus.OK);
+		return response;
+	}
+	
+	public static HttpResponseDTO success(final String message) {
+		final HttpResponseDTO response = new HttpResponseDTO();
+		response.setSuccess(Boolean.TRUE);
+		response.addMessage(message);
 		response.setStatus(HttpStatus.OK);
 		return response;
 	}

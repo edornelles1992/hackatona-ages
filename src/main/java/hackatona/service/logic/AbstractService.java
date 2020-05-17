@@ -1,4 +1,4 @@
-package hackatona.service;
+package hackatona.service.logic;
 
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
@@ -15,7 +15,7 @@ import hackatona.dao.UserDao;
 public class AbstractService {
 	
 	@Autowired
-	protected ModelMapper modelMapper;
+	protected ModelMapper mapper;
 	
 	@Autowired
 	protected Logger logger;

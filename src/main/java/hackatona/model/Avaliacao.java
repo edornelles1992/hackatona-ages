@@ -17,16 +17,22 @@ public class Avaliacao {
 	private Long id;
 
 	private Integer software;
-	
+
 	private Integer processo;
-	
+
 	private Integer pitch;
-	
+
 	private Integer inovacao;
-	
+
 	private User user;
-	
+
 	private Time time;
+
+	public Avaliacao(User user, Time time) {
+		super();
+		this.user = user;
+		this.time = time;
+	}
 
 	public Long getId() {
 		return id;

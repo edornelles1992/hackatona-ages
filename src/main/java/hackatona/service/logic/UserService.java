@@ -1,4 +1,4 @@
-package hackatona.service;
+package hackatona.service.logic;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,7 +36,7 @@ public class UserService extends AbstractService {
 		User user = userDao.findByUsuario(usuario);
 
 		if (user != null) {
-			UserDTO userDTO = modelMapper.map(user, UserDTO.class);
+			UserDTO userDTO = mapper.map(user, UserDTO.class);
 			response.setSuccess(true);
 			response.addContent("user", userDTO);
 			return response;
@@ -56,16 +56,13 @@ public class UserService extends AbstractService {
 	public HttpResponseDTO registerUser(final User user) {
 		this.LogServiceConsumed(this.getClassName(), "registerUser");
 		HttpResponseDTO response = new HttpResponseDTO();
-		String errorMessage = ValidationUtils.validateUserFields(user);
+		String error = ValidationUtils.validateUserFields(user);
 
-		if (errorMessage.equals(Parameters.AUTHORIZED)) {
+		if (error == null) {
 			userDao.save(user);
-			response.setSuccess(true);
-			response.addMessage(Messages.A002);
-		} else {
-			response.setSuccess(false);
-			response.addMessage(errorMessage);
-		}
+			HttpResponseDTO.success("Usuário cadastrado com sucesso");	
+		} else 
+			HttpResponseDTO.fail(error);	
 		return response;
 	}
 

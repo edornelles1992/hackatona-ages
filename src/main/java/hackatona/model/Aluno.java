@@ -16,7 +16,7 @@ public class Aluno {
 	@Column(name = "id")
 	private Long id;
 
-	private Long matricula;
+	private String matricula;
 
 	private String sugestao;
 
@@ -24,7 +24,17 @@ public class Aluno {
 
 	private Time time;
 
-	private Long id_curso;
+	private String id_curso;
+
+	private String nome;
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
 	public Long getId() {
 		return id;
@@ -34,11 +44,11 @@ public class Aluno {
 		this.id = id;
 	}
 
-	public Long getMatricula() {
+	public String getMatricula() {
 		return matricula;
 	}
 
-	public void setMatricula(Long matricula) {
+	public void setMatricula(String matricula) {
 		this.matricula = matricula;
 	}
 
@@ -66,11 +76,11 @@ public class Aluno {
 		this.time = time;
 	}
 
-	public Long getId_curso() {
+	public String getId_curso() {
 		return id_curso;
 	}
 
-	public void setId_curso(Long id_curso) {
+	public void setId_curso(String id_curso) {
 		this.id_curso = id_curso;
 	}
 

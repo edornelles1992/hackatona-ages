@@ -6,7 +6,7 @@ public class AlunoDTO {
 
 	private Long id;
 
-	private Long matricula;
+	private String matricula;
 
 	private String sugestao;
 
@@ -14,7 +14,26 @@ public class AlunoDTO {
 
 	private Time time;
 
-	private Long id_curso;
+	private String id_curso;
+
+	private String nome;
+
+	public AlunoDTO(String matricula, String sugestao, String curso, String id_curso, String nome) {
+		super();
+		this.matricula = matricula;
+		this.sugestao = sugestao;
+		this.curso = curso;
+		this.id_curso = id_curso;
+		this.nome = nome;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
 	public Long getId() {
 		return id;
@@ -24,11 +43,11 @@ public class AlunoDTO {
 		this.id = id;
 	}
 
-	public Long getMatricula() {
+	public String getMatricula() {
 		return matricula;
 	}
 
-	public void setMatricula(Long matricula) {
+	public void setMatricula(String matricula) {
 		this.matricula = matricula;
 	}
 
@@ -56,11 +75,11 @@ public class AlunoDTO {
 		this.time = time;
 	}
 
-	public Long getId_curso() {
+	public String getId_curso() {
 		return id_curso;
 	}
 
-	public void setId_curso(Long id_curso) {
+	public void setId_curso(String id_curso) {
 		this.id_curso = id_curso;
 	}
 }

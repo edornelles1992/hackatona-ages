@@ -7,4 +7,5 @@ import hackatona.model.Time;
 
 public interface TimeDao extends CrudRepository<Time, Long>, JpaSpecificationExecutor<Time> {
 
+	Time findByNome(String nome);
 }
