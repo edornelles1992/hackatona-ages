@@ -31,7 +31,7 @@ public class AlunoService extends AbstractService {
 		this.LogServiceConsumed(this.getClassName(), "listAlunos");
 		HttpResponseDTO response = new HttpResponseDTO();
 
-		List<AlunoDTO> list = mapper.map(alunoDao.findAll(), List.class);
+		List<AlunoDTO> list = mapper.mapAll(alunoDao.findAll(), AlunoDTO.class);
 		response.setSuccess(true);
 		response.addContent(list);
 		return response;

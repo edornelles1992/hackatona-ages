@@ -1,61 +1,75 @@
 
-/* PESSOAS */
+/* USUARIOS */
+--perfil -> 1 - admin / 2 - avaliador
+INSERT INTO hackatona.T_USUARIO
+(id, nome, usuario, senha, perfil)
+VALUES(1, 'admin', 'admin', 'ba3253876aed6bc22d4a6ff53d8406c6ad864195ed144ab5c87621b6c233b548baeae6956df346ec8c17f5ea10f35ee3cbc514797ed7ddd3145464e2a0bab413', 1);
 
-INSERT INTO info_goods.T_PESSOA
-(estado, cidade, nome, data_nascimento, email, senha)
-VALUES('Rio Grande do Sul', 'Porto Alegre', 'Eduardo Dornelles', '1992-06-30', 'e_dornelles1992@hotmail.com', '123456');
+INSERT INTO hackatona.T_USUARIO
+(id, nome, usuario, senha, perfil)
+VALUES(2, 'avaliador1', 'avaliador1', 'ba3253876aed6bc22d4a6ff53d8406c6ad864195ed144ab5c87621b6c233b548baeae6956df346ec8c17f5ea10f35ee3cbc514797ed7ddd3145464e2a0bab413', 2);
 
-INSERT INTO info_goods.T_PESSOA
-(estado, cidade, nome, data_nascimento, email, senha)
-VALUES('Parana',  'Londrina', 'Luiz Paulo', '1995-08-25', 'luiz_123@hotmail.com', '123456');
+INSERT INTO hackatona.T_USUARIO
+(id, nome, usuario, senha, perfil)
+VALUES(3, 'avaliador2', 'avaliador2', 'ba3253876aed6bc22d4a6ff53d8406c6ad864195ed144ab5c87621b6c233b548baeae6956df346ec8c17f5ea10f35ee3cbc514797ed7ddd3145464e2a0bab413', 2);
 
-INSERT INTO info_goods.T_PESSOA
-(estado, cidade, nome, data_nascimento, email, senha)
-VALUES('São Paulo', 'São Paulo', 'Maria Silva de Paula', '1994-03-05', 'mariasilva@gmail.com', '123456');
+/* TIME */
 
-INSERT INTO info_goods.T_PESSOA
-(estado, cidade, nome, data_nascimento, email, senha)
-VALUES('Salvador', 'Bahia', 'João Ricardo', '1997-08-21', 'joaoricardo2@hotmail.com', '123456');
+INSERT INTO hackatona.T_TIME
+(id, nome)
+VALUES(1 ,'Azul');
 
-/* PRODUTOS */
+INSERT INTO hackatona.T_TIME
+(id, nome)
+VALUES(2 ,'Verde');
 
-INSERT INTO info_goods.T_PRODUTO
-(fabricante, nome, valor)
-VALUES('Zupis', 'ChocolateMC', 5);
+INSERT INTO hackatona.T_TIME
+(id, nome)
+VALUES(3, 'Amarelo');
 
-INSERT INTO info_goods.T_PRODUTO
-(fabricante, nome, valor)
-VALUES('zzxte', 'Mamão', 3);
+INSERT INTO hackatona.T_TIME
+(id, nome)
+VALUES(4, 'Preto');
 
-INSERT INTO info_goods.T_PRODUTO
-(fabricante, nome, valor)
-VALUES('luluz', 'Salgadinho Chips', 6);
+/* ALUNO */
+INSERT INTO hackatona.T_ALUNO
+(matricula, sugestao, curso, id_time, id_curso, nome)
+VALUES('134938251','Time Azul', 'Engenharia de Software', 1, '111', 'Marco Silva');
 
-INSERT INTO info_goods.T_PRODUTO
-(fabricante, nome, valor)
-VALUES('Joao Ltda', 'Bolacha Bono', 2);
+INSERT INTO hackatona.T_ALUNO
+(matricula, sugestao, curso, id_time, id_curso, nome)
+VALUES('624626657','Time Verde', 'Engenharia de Software', 2,  '111', 'João Pedro');
 
-/* MENSAGENS */
+INSERT INTO hackatona.T_ALUNO
+(matricula, sugestao, curso, id_time, id_curso, nome)
+VALUES('568484562','Time Verde', 'Engenharia de Software', 2,  '111', 'Julia Costa');
 
-INSERT INTO T_MENSAGEM (cod_mensagem, mensagem) 
-VALUES ('A001', 'Usuário não encontrado.');
+INSERT INTO hackatona.T_ALUNO
+(matricula, sugestao, curso, id_curso, nome)
+VALUES('547547238','Time Azul', 'Ciência da Computação', '222', 'Marco Silva');
 
-INSERT INTO T_MENSAGEM (cod_mensagem, mensagem) 
-values ('A002', 'Conta criada com sucesso.');
+INSERT INTO hackatona.T_ALUNO
+(matricula, curso, id_curso, nome)
+VALUES('987567535', 'Sistemas de Informação', '333', 'Mariana Castro');
 
-INSERT INTO T_MENSAGEM (cod_mensagem, mensagem) 
-values ('A003', 'Erro ao criar a conta.');
+INSERT INTO hackatona.T_ALUNO
+(matricula, sugestao, curso, id_time, id_curso, nome)
+VALUES('166879988','Time Azul', 'Engenharia de Computação', 1, '444', 'Paulo Manoel');
 
-INSERT INTO T_MENSAGEM (cod_mensagem, mensagem) 
-values ('A004', 'Preencha todos os campos corretamente.');
+INSERT INTO hackatona.T_ALUNO
+(matricula, curso, id_curso, nome)
+VALUES('546546456', 'Engenharia de Computação', '444', 'Ramiro Costa');
 
-INSERT INTO T_MENSAGEM (cod_mensagem, mensagem) 
-values ('A005', 'Digite um E-mail válido.');
+/* AVALIACAO */
+INSERT INTO hackatona.T_AVALIACAO
+(software, processo, pitch, inovacao, id_usuario, id_time)
+VALUES(3, 4, 2, 4, 2, 1);
 
-INSERT INTO T_MENSAGEM (cod_mensagem, mensagem) 
-values ('A006', 'Digite uma senha com no minimo seis caracteres.');
+INSERT INTO hackatona.T_AVALIACAO
+(software, processo, pitch, inovacao, id_usuario, id_time)
+VALUES(3, 4, 2, 4, 2, 2);
 
-
-
-
+INSERT INTO hackatona.T_AVALIACAO
+(software, processo, pitch, inovacao, id_usuario, id_time)
+VALUES(3, 4, 2, 4, 3, 1);
 

@@ -1,11 +1,9 @@
 package hackatona.service.logic;
 
-import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import hackatona.dao.AlunoDao;
-import hackatona.dao.UserDao;
+import hackatona.utility.ObjectMapperUtils;
 /**
  * Abstract class containing the Daos and 
  * other things useful to all services classes. 
@@ -15,7 +13,7 @@ import hackatona.dao.UserDao;
 public class AbstractService {
 	
 	@Autowired
-	protected ModelMapper mapper;
+	protected ObjectMapperUtils mapper;
 	
 	@Autowired
 	protected Logger logger;
