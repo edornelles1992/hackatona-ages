@@ -5,10 +5,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "T_AVALIACAO")
+@Table(name = "t_avaliacao")
 public class Avaliacao {
 
 	@Id
@@ -24,8 +27,12 @@ public class Avaliacao {
 
 	private Integer inovacao;
 
+	@ManyToOne
+	@JoinColumn(name = "id", insertable = false, updatable = false)
 	private User user;
 
+	@ManyToOne
+	@JoinColumn(name = "id", insertable = false, updatable = false)
 	private Time time;
 
 	public Avaliacao(User user, Time time) {

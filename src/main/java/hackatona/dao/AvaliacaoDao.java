@@ -11,9 +11,9 @@ import hackatona.model.User;
 
 public interface AvaliacaoDao extends CrudRepository<Avaliacao, Long>, JpaSpecificationExecutor<Avaliacao> {
 
-	Avaliacao findByUsuarioAndTime(User usuario, Time time);
+	Avaliacao findByUserAndTime(User usuario, Time time);
 	
-	List<Avaliacao> findByUsuario(User usuario);
+	List<Avaliacao> findByUser(User usuario);
 	
     @Override
     List<Avaliacao> findAll();

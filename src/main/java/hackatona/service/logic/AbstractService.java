@@ -2,6 +2,7 @@ package hackatona.service.logic;
 
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import hackatona.utility.ObjectMapperUtils;
 /**
@@ -10,6 +11,7 @@ import hackatona.utility.ObjectMapperUtils;
  * @author Eduardo Dornelles
  *
  */
+@Service
 public class AbstractService {
 	
 	@Autowired

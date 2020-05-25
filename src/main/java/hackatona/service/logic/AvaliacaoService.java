@@ -44,7 +44,7 @@ public class AvaliacaoService extends AbstractService {
 
 		if (time == null || usuario == null)
 			HttpResponseDTO.fail("Time ou avaliador não encontrado.");
-		if (this.avaliacaoDao.findByUsuarioAndTime(usuario, time) != null)
+		if (this.avaliacaoDao.findByUserAndTime(usuario, time) != null)
 			HttpResponseDTO.fail("Avaliação já existente!");
 
 		Avaliacao avaliacao = new Avaliacao(usuario, time);
@@ -75,7 +75,7 @@ public class AvaliacaoService extends AbstractService {
 	public HttpResponseDTO listarAvaliacoesPorAvaliador(Long idUsuario) {
 		this.LogServiceConsumed(this.getClassName(), "listarAvaliacoesPorAvaliador");
 		User usuario = userDao.findOne(idUsuario);
-		return HttpResponseDTO.success(mapper.mapAll(this.avaliacaoDao.findByUsuario(usuario), AvaliacaoDTO.class));
+		return HttpResponseDTO.success(mapper.mapAll(this.avaliacaoDao.findByUser(usuario), AvaliacaoDTO.class));
 	}
 
 }
