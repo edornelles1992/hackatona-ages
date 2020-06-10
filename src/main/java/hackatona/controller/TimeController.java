@@ -29,7 +29,7 @@ public class TimeController extends AbstractController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	@ResponseBody
-	public ResponseEntity<HttpResponseDTO> getTime(@RequestParam Long id) throws Exception {
+	public ResponseEntity<HttpResponseDTO> getTime(@RequestParam Integer id) throws Exception {
 		return super.response(timeService.buscarTime(id), HttpStatus.OK);
 	}
 	
@@ -41,25 +41,25 @@ public class TimeController extends AbstractController {
 
 	@RequestMapping(value = "/excluir", method = RequestMethod.DELETE)
 	@ResponseBody
-	public ResponseEntity<HttpResponseDTO> excluirTime(@RequestParam Long id) throws Exception {
+	public ResponseEntity<HttpResponseDTO> excluirTime(@RequestParam Integer id) throws Exception {
 		return super.response(timeService.excluirTime(id), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/adicionar_aluno", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<HttpResponseDTO> adicionarIntegrante(@RequestParam Long idAluno, @RequestParam Long idTime) throws Exception {
+	public ResponseEntity<HttpResponseDTO> adicionarIntegrante(@RequestParam Integer idAluno, @RequestParam Integer idTime) throws Exception {
 		return super.response(timeService.adicionarAluno(idTime, idTime), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/remover_aluno", method = RequestMethod.DELETE)
 	@ResponseBody
-	public ResponseEntity<HttpResponseDTO> removerAluno(@RequestParam Long id) throws Exception {
+	public ResponseEntity<HttpResponseDTO> removerAluno(@RequestParam Integer id) throws Exception {
 		return super.response(timeService.removerAluno(id), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/validar", method = RequestMethod.GET)
 	@ResponseBody
-	public ResponseEntity<HttpResponseDTO> validarTime(@RequestParam Long id) throws Exception {
+	public ResponseEntity<HttpResponseDTO> validarTime(@RequestParam Integer id) throws Exception {
 		return super.response(timeService.validarTime(id), HttpStatus.OK);
 	}
 }

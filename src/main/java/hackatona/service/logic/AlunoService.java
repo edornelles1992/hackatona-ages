@@ -37,11 +37,11 @@ public class AlunoService extends AbstractService {
 		return response;
 	}
 
-	public HttpResponseDTO getAluno(Long id) {
+	public HttpResponseDTO getAluno(Integer id) {
 		this.LogServiceConsumed(this.getClassName(), "getAluno");
 		HttpResponseDTO response = new HttpResponseDTO();
 
-		AlunoDTO productDto = mapper.map(alunoDao.findOne(id), AlunoDTO.class);
+		AlunoDTO productDto = mapper.map(alunoDao.findById(id).get(), AlunoDTO.class);
 		if (productDto != null) {
 			response.setSuccess(true);
 			response.addContent(productDto);

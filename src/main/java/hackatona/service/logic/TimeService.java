@@ -33,20 +33,20 @@ public class TimeService extends AbstractService {
 		}
 	}
 
-	public HttpResponseDTO excluirTime(Long id) {
+	public HttpResponseDTO excluirTime(Integer id) {
 		this.LogServiceConsumed(this.getClassName(), "excluirTime");
 		try {
-			this.timeDao.delete(id);
+			this.timeDao.deleteById(id);
 			return HttpResponseDTO.success("Time apagado com sucesso!");
 		} catch (Exception e) {
 			return HttpResponseDTO.fail(e.getMessage());
 		}
 	}
 
-	public HttpResponseDTO adicionarAluno(Long idAluno, Long idTime) {
+	public HttpResponseDTO adicionarAluno(Integer idAluno, Integer idTime) {
 		this.LogServiceConsumed(this.getClassName(), "adicionarAluno");
-			Aluno aluno = this.alunoDao.findOne(idAluno);
-			Time time = this.timeDao.findOne(idTime);
+			Aluno aluno = this.alunoDao.findById(idAluno).get();
+			Time time = this.timeDao.findById(idTime).get();
 			if (aluno != null && time != null) {
 				aluno.setTime(time);
 				this.alunoDao.save(aluno);
@@ -56,10 +56,10 @@ public class TimeService extends AbstractService {
 			}
 	}
 
-	public HttpResponseDTO removerAluno(Long id) {
+	public HttpResponseDTO removerAluno(Integer id) {
 		this.LogServiceConsumed(this.getClassName(), "removerAluno");
 		try {
-			this.alunoDao.delete(id);
+			this.alunoDao.deleteById(id);
 			return HttpResponseDTO.success("Aluno removido do time com sucesso!");
 		} catch (Exception e) {
 			return HttpResponseDTO.fail(e.getMessage());
@@ -71,9 +71,9 @@ public class TimeService extends AbstractService {
 		return HttpResponseDTO.success(mapper.mapAll(this.timeDao.findAll(), TimeDTO.class));
 	}
 
-	public HttpResponseDTO buscarTime(Long id) {
+	public HttpResponseDTO buscarTime(Integer id) {
 		this.LogServiceConsumed(this.getClassName(), "buscarTime");
-		return HttpResponseDTO.success(mapper.map(this.timeDao.findOne(id), TimeDTO.class));
+		return HttpResponseDTO.success(mapper.map(this.timeDao.findById(id).get(), TimeDTO.class));
 	}
 
 	/**
@@ -82,9 +82,9 @@ public class TimeService extends AbstractService {
 	 * @param id
 	 * @return HttpResponseDTO
 	 */
-	public HttpResponseDTO validarTime(Long id) {
+	public HttpResponseDTO validarTime(Integer id) {
 		this.LogServiceConsumed(this.getClassName(), "validarTime");
-		Time time = this.timeDao.findOne(id);
+		Time time = this.timeDao.findById(id).get();
 		if (time == null) 
 			HttpResponseDTO.fail("Time não encontrado!");
 		

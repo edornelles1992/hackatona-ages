@@ -9,7 +9,7 @@ import hackatona.model.Avaliacao;
 import hackatona.model.Time;
 import hackatona.model.User;
 
-public interface AvaliacaoDao extends CrudRepository<Avaliacao, Long>, JpaSpecificationExecutor<Avaliacao> {
+public interface AvaliacaoDao extends CrudRepository<Avaliacao, Integer>, JpaSpecificationExecutor<Avaliacao> {
 
 	Avaliacao findByUserAndTime(User usuario, Time time);
 	

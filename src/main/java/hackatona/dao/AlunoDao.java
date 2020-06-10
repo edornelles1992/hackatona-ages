@@ -8,11 +8,11 @@ import org.springframework.data.repository.CrudRepository;
 import hackatona.model.Aluno;
 import hackatona.model.User;
 
-public interface AlunoDao extends CrudRepository<Aluno, Long>, JpaSpecificationExecutor<Aluno> {
+public interface AlunoDao extends CrudRepository<Aluno, Integer>, JpaSpecificationExecutor<Aluno> {
 
 	Aluno findByMatricula(String matricula);
 	
-	List<Aluno> findByTime(Long idTime);
+	List<Aluno> findByTime(Integer idTime);
 	
     @Override
     List<Aluno> findAll();

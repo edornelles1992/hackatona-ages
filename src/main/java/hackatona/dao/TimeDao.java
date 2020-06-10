@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import hackatona.model.Time;
 
-public interface TimeDao extends CrudRepository<Time, Long>, JpaSpecificationExecutor<Time> {
+public interface TimeDao extends CrudRepository<Time, Integer>, JpaSpecificationExecutor<Time> {
 
 	Time findByNome(String nome);
 	

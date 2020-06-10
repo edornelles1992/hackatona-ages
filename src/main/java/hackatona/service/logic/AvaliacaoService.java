@@ -34,13 +34,13 @@ public class AvaliacaoService extends AbstractService {
 	 * @param idUsuario
 	 * @return HttpResponseDTO
 	 */
-	public HttpResponseDTO criarAvaliacao(Long idTime, Long idUsuario) {
+	public HttpResponseDTO criarAvaliacao(Integer idTime, Integer idUsuario) {
 		this.LogServiceConsumed(this.getClassName(), "criarAvaliacao");
 		if (idTime == null || idUsuario == null)
 			HttpResponseDTO.fail("Time ou Avaliador inválido!");
 
-		Time time = this.timeDao.findOne(idTime);
-		User usuario = this.userDao.findOne(idUsuario);
+		Time time = this.timeDao.findById(idTime).get();
+		User usuario = this.userDao.findById(idUsuario).get();
 
 		if (time == null || usuario == null)
 			HttpResponseDTO.fail("Time ou avaliador não encontrado.");
@@ -62,9 +62,9 @@ public class AvaliacaoService extends AbstractService {
 		return HttpResponseDTO.success("Avaliação realizada com sucesso!");
 	}
 
-	public HttpResponseDTO buscarAvaliacao(Long id) {
+	public HttpResponseDTO buscarAvaliacao(Integer id) {
 		this.LogServiceConsumed(this.getClassName(), "buscarAvaliacao");
-		return HttpResponseDTO.success(mapper.map(this.avaliacaoDao.findOne(id), AvaliacaoDTO.class));
+		return HttpResponseDTO.success(mapper.map(this.avaliacaoDao.findById(id).get(), AvaliacaoDTO.class));
 	}
 
 	public HttpResponseDTO listarAvaliacoes() {
@@ -72,9 +72,9 @@ public class AvaliacaoService extends AbstractService {
 		return HttpResponseDTO.success(mapper.mapAll( this.avaliacaoDao.findAll(), AvaliacaoDTO.class));
 	}
 	
-	public HttpResponseDTO listarAvaliacoesPorAvaliador(Long idUsuario) {
+	public HttpResponseDTO listarAvaliacoesPorAvaliador(Integer idUsuario) {
 		this.LogServiceConsumed(this.getClassName(), "listarAvaliacoesPorAvaliador");
-		User usuario = userDao.findOne(idUsuario);
+		User usuario = userDao.findById(idUsuario).get();
 		return HttpResponseDTO.success(mapper.mapAll(this.avaliacaoDao.findByUser(usuario), AvaliacaoDTO.class));
 	}
 

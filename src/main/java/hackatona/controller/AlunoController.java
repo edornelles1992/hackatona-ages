@@ -28,7 +28,7 @@ public class AlunoController extends AbstractController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	@ResponseBody
-	public ResponseEntity<HttpResponseDTO> getAluno(Long id) throws Exception {
+	public ResponseEntity<HttpResponseDTO> getAluno(Integer id) throws Exception {
 		return super.response(alunoService.getAluno(id), HttpStatus.OK);
 	}
 	

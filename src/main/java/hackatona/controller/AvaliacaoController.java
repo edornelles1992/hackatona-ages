@@ -28,7 +28,7 @@ public class AvaliacaoController extends AbstractController {
 	 */
 	@RequestMapping(value = "/abrir", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<HttpResponseDTO> criarAvaliacao(@RequestParam Long idTime, @RequestParam Long idUsuario) throws Exception {
+	public ResponseEntity<HttpResponseDTO> criarAvaliacao(@RequestParam Integer idTime, @RequestParam Integer idUsuario) throws Exception {
 		return super.response(avaliacaoService.criarAvaliacao(idTime, idUsuario), HttpStatus.OK);
 	}
 	
@@ -50,7 +50,7 @@ public class AvaliacaoController extends AbstractController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	@ResponseBody
-	public ResponseEntity<HttpResponseDTO> buscarAvaliacao(@RequestParam Long id) throws Exception {
+	public ResponseEntity<HttpResponseDTO> buscarAvaliacao(@RequestParam Integer id) throws Exception {
 		return super.response(avaliacaoService.buscarAvaliacao(id), HttpStatus.OK);
 	}
 	
@@ -72,7 +72,7 @@ public class AvaliacaoController extends AbstractController {
 	 */
 	@RequestMapping(value = "/listar/avaliador", method = RequestMethod.GET)
 	@ResponseBody
-	public ResponseEntity<HttpResponseDTO> listarAvaliacoesPorAvaliador(@RequestParam Long id) throws Exception {
+	public ResponseEntity<HttpResponseDTO> listarAvaliacoesPorAvaliador(@RequestParam Integer id) throws Exception {
 		return super.response(avaliacaoService.listarAvaliacoesPorAvaliador(id), HttpStatus.OK);
 	}
 

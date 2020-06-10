@@ -8,7 +8,7 @@ import org.springframework.data.repository.CrudRepository;
 import hackatona.model.Avaliacao;
 import hackatona.model.User;
 
-public interface UserDao extends CrudRepository<User, Long>, JpaSpecificationExecutor<User>{
+public interface UserDao extends CrudRepository<User, Integer>, JpaSpecificationExecutor<User>{
 	
 	User findByUsuario(String usuario);
 
