@@ -73,3 +73,8 @@ INSERT INTO hackatona.T_AVALIACAO
 (software, processo, pitch, inovacao, id_usuario, id_time)
 VALUES(3, 4, 2, 4, 3, 1);
 
+/* AJUSTE IDS TABELAS */
+ALTER TABLE hackatona.t_aluno CHANGE id id_aluno int auto_increment NOT NULL;
+ALTER TABLE hackatona.t_avaliacao CHANGE id id_avaliacao int auto_increment NOT NULL;
+ALTER TABLE hackatona.t_time CHANGE id_time id_time int auto_increment NOT NULL;
+ALTER TABLE hackatona.t_usuario CHANGE id id_usuario int auto_increment NOT NULL;

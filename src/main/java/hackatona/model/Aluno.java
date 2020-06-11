@@ -6,7 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -15,7 +15,7 @@ public class Aluno {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
+	@Column(name = "id_aluno")
 	private Integer id;
 
 	private String matricula;
@@ -24,7 +24,7 @@ public class Aluno {
 
 	private String curso;
 
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "id_time")
 	private Time time;
 

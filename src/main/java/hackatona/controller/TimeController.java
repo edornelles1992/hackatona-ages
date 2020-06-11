@@ -48,13 +48,13 @@ public class TimeController extends AbstractController {
 	@RequestMapping(value = "/adicionar_aluno", method = RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity<HttpResponseDTO> adicionarIntegrante(@RequestParam Integer idAluno, @RequestParam Integer idTime) throws Exception {
-		return super.response(timeService.adicionarAluno(idTime, idTime), HttpStatus.OK);
+		return super.response(timeService.adicionarAluno(idAluno, idTime), HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/remover_aluno", method = RequestMethod.DELETE)
 	@ResponseBody
-	public ResponseEntity<HttpResponseDTO> removerAluno(@RequestParam Integer id) throws Exception {
-		return super.response(timeService.removerAluno(id), HttpStatus.OK);
+	public ResponseEntity<HttpResponseDTO> removerAluno(@RequestParam Integer idAluno) throws Exception {
+		return super.response(timeService.removerAluno(idAluno), HttpStatus.OK);
 	}
 	
 	@RequestMapping(value = "/validar", method = RequestMethod.GET)

@@ -19,8 +19,8 @@ public class User implements Serializable, UserDetails {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private Integer id;
+	@Column(name = "id_usuario")
+	private Integer idUser;
 
 	private String nome;
 
@@ -31,11 +31,11 @@ public class User implements Serializable, UserDetails {
 	private Integer perfil;
 
 	public Integer getId() {
-		return id;
+		return idUser;
 	}
 
 	public void setId(Integer id) {
-		this.id = id;
+		this.idUser = id;
 	}
 
 	public Integer getPerfil() {

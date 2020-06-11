@@ -57,8 +57,12 @@ public class AvaliacaoService extends AbstractService {
 		String erro = ValidationUtils.validarAvaliacao(dto);
 		if (erro != null)
 			HttpResponseDTO.fail(erro);
-		
-		this.avaliacaoDao.save(mapper.map(dto, Avaliacao.class));
+		Avaliacao avaliacao = this.avaliacaoDao.findById(dto.getId()).get();
+		avaliacao.setInovacao(dto.getInovacao());
+		avaliacao.setPitch(dto.getPitch());
+		avaliacao.setProcesso(dto.getProcesso());
+		avaliacao.setSoftware(dto.getSoftware());
+		this.avaliacaoDao.save(avaliacao);
 		return HttpResponseDTO.success("Avaliação realizada com sucesso!");
 	}
 

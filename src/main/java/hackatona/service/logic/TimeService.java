@@ -45,21 +45,23 @@ public class TimeService extends AbstractService {
 
 	public HttpResponseDTO adicionarAluno(Integer idAluno, Integer idTime) {
 		this.LogServiceConsumed(this.getClassName(), "adicionarAluno");
-			Aluno aluno = this.alunoDao.findById(idAluno).get();
-			Time time = this.timeDao.findById(idTime).get();
-			if (aluno != null && time != null) {
-				aluno.setTime(time);
-				this.alunoDao.save(aluno);
-				return HttpResponseDTO.success("Aluno adicionado ao time " + time.getNome() + "com sucesso!");
-			} else {
-				return HttpResponseDTO.fail("Erro ao adicionar o aluno ao time.");
-			}
+		Aluno aluno = this.alunoDao.findById(idAluno).get();
+		Time time = this.timeDao.findById(idTime).get();
+		if (aluno != null && time != null) {
+			aluno.setTime(time);
+			this.alunoDao.save(aluno);
+			return HttpResponseDTO.success("Aluno adicionado ao time " + time.getNome() + " com sucesso!");
+		} else {
+			return HttpResponseDTO.fail("Erro ao adicionar o aluno ao time.");
+		}
 	}
 
 	public HttpResponseDTO removerAluno(Integer id) {
 		this.LogServiceConsumed(this.getClassName(), "removerAluno");
 		try {
-			this.alunoDao.deleteById(id);
+			Aluno aluno = this.alunoDao.findById(id).get();
+			aluno.setTime(null);
+			this.alunoDao.save(aluno);
 			return HttpResponseDTO.success("Aluno removido do time com sucesso!");
 		} catch (Exception e) {
 			return HttpResponseDTO.fail(e.getMessage());
@@ -77,28 +79,29 @@ public class TimeService extends AbstractService {
 	}
 
 	/**
-	 * Valida o time com a regra de existir pelo menos uma pessoa
-	 * de um curso diferente dentro do time.
+	 * Valida o time com a regra de existir pelo menos uma pessoa de um curso
+	 * diferente dentro do time.
+	 * 
 	 * @param id
 	 * @return HttpResponseDTO
 	 */
 	public HttpResponseDTO validarTime(Integer id) {
 		this.LogServiceConsumed(this.getClassName(), "validarTime");
 		Time time = this.timeDao.findById(id).get();
-		if (time == null) 
+		if (time == null)
 			HttpResponseDTO.fail("Time não encontrado!");
-		
-		List<Aluno> alunos = this.alunoDao.findByTime(id);
+
+		List<Aluno> alunos = this.alunoDao.findByTime(time);
 
 		if (alunos == null || alunos.isEmpty())
 			HttpResponseDTO.fail("Este time não possui nenhum integrante.");
-		
+
 		Aluno atual = alunos.get(0);
 		for (Aluno aluno : alunos) {
 			if (!atual.getId_curso().equals(aluno.getId_curso()))
-				HttpResponseDTO.success("Time válido!");
+				return HttpResponseDTO.success("Time válido!");
 		}
-		
+
 		return HttpResponseDTO.fail("Time inválido!");
 	}
 

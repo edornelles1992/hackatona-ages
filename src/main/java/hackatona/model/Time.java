@@ -13,17 +13,27 @@ public class Time {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private Integer id;
+	@Column(name = "id_time")
+	private Integer idTime;
 
 	private String nome;
+	
+	public Time() {
+		
+	}
+
+	public Time(Integer id, String nome) {
+		super();
+		this.idTime = id;
+		this.nome = nome;
+	}
 
 	public Integer getId() {
-		return id;
+		return idTime;
 	}
 
 	public void setId(Integer id) {
-		this.id = id;
+		this.idTime = id;
 	}
 
 	public String getNome() {

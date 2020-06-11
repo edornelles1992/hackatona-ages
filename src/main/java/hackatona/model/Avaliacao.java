@@ -16,7 +16,7 @@ public class Avaliacao {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
+	@Column(name = "id_avaliacao")
 	private Integer id;
 
 	private Integer software;
@@ -28,11 +28,11 @@ public class Avaliacao {
 	private Integer inovacao;
 
 	@ManyToOne
-	@JoinColumn(name = "id", insertable = false, updatable = false)
+	@JoinColumn(name = "id_usuario")
 	private User user;
 
 	@ManyToOne
-	@JoinColumn(name = "id", insertable = false, updatable = false)
+	@JoinColumn(name = "id_time")
 	private Time time;
 
 	public Avaliacao() {

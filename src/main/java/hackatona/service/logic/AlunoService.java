@@ -61,9 +61,8 @@ public class AlunoService extends AbstractService {
 			return HttpResponseDTO.fail(erro);				
 		if (alunoDao.findByMatricula(dto.getMatricula()) != null) 
 			return HttpResponseDTO.fail("Aluno já cadastrado.");
-
-		alunoDao.save(mapper.map(dto, Aluno.class));
-		return HttpResponseDTO.success("Aluno cadastrado com sucesso!");
+		
+		return HttpResponseDTO.success(alunoDao.save(mapper.map(dto, Aluno.class)));
 	}
 
 	public HttpResponseDTO importarAlunos() {

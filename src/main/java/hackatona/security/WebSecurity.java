@@ -1,11 +1,9 @@
 package hackatona.security;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -15,7 +13,7 @@ public class WebSecurity extends WebSecurityConfigurerAdapter implements Securit
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors().disable();
+        http.cors().disable().csrf().disable();
 //                .antMatchers(HttpMethod.POST, SIGN_UP_URL).permitAll()
 //                .anyRequest().authenticated()
 //                .and()
