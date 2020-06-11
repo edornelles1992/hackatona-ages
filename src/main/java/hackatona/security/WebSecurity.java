@@ -31,4 +31,6 @@ public class WebSecurity extends WebSecurityConfigurerAdapter implements Securit
     source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
     return source;
   }
+  
+  
 }
