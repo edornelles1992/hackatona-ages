@@ -59,7 +59,7 @@ public class AvaliacaoController extends AbstractController {
 	 * @return {@link ResponseEntity<HttpResponseDTO>}
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/listar", method = RequestMethod.GET)
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseEntity<HttpResponseDTO> listarAvaliacoes() throws Exception {
 		return super.response(avaliacaoService.listarAvaliacoes(), HttpStatus.OK);
@@ -70,7 +70,7 @@ public class AvaliacaoController extends AbstractController {
 	 * @return {@link ResponseEntity<HttpResponseDTO>}
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/listar/avaliador", method = RequestMethod.GET)
+	@RequestMapping(value = "/list/avaliador", method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseEntity<HttpResponseDTO> listarAvaliacoesPorAvaliador(@RequestParam Integer id) throws Exception {
 		return super.response(avaliacaoService.listarAvaliacoesPorAvaliador(id), HttpStatus.OK);

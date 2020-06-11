@@ -68,7 +68,7 @@ public class TimeService extends AbstractService {
 
 	public HttpResponseDTO listarTimes() {
 		this.LogServiceConsumed(this.getClassName(), "listarTimes");
-		return HttpResponseDTO.success(mapper.mapAll(this.timeDao.findAll(), TimeDTO.class));
+		return HttpResponseDTO.success("list", mapper.mapAll(this.timeDao.findAll(), TimeDTO.class));
 	}
 
 	public HttpResponseDTO buscarTime(Integer id) {

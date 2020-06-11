@@ -69,13 +69,13 @@ public class AvaliacaoService extends AbstractService {
 
 	public HttpResponseDTO listarAvaliacoes() {
 		this.LogServiceConsumed(this.getClassName(), "listarAvaliacoes");
-		return HttpResponseDTO.success(mapper.mapAll( this.avaliacaoDao.findAll(), AvaliacaoDTO.class));
+		return HttpResponseDTO.success("list",mapper.mapAll( this.avaliacaoDao.findAll(), AvaliacaoDTO.class));
 	}
 	
 	public HttpResponseDTO listarAvaliacoesPorAvaliador(Integer idUsuario) {
 		this.LogServiceConsumed(this.getClassName(), "listarAvaliacoesPorAvaliador");
 		User usuario = userDao.findById(idUsuario).get();
-		return HttpResponseDTO.success(mapper.mapAll(this.avaliacaoDao.findByUser(usuario), AvaliacaoDTO.class));
+		return HttpResponseDTO.success("list",mapper.mapAll(this.avaliacaoDao.findByUser(usuario), AvaliacaoDTO.class));
 	}
 
 }

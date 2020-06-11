@@ -5,6 +5,10 @@ public class TimeDTO {
 	private Integer id;
 
 	private String nome;
+	
+	public TimeDTO() {
+		
+	}
 
 	public Integer getId() {
 		return id;

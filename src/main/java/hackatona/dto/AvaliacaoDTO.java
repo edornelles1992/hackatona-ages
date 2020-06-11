@@ -15,6 +15,10 @@ public class AvaliacaoDTO {
 	private UserDTO user;
 
 	private TimeDTO time;
+	
+	public AvaliacaoDTO() {
+		
+	}
 
 	public Integer getId() {
 		return id;

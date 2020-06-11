@@ -11,6 +11,10 @@ public class UserDTO {
 	private String senha;
 
 	private Integer perfil;
+	
+	public UserDTO() {
+		
+	}
 
 	public Integer getId() {
 		return id;

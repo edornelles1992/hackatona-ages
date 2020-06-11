@@ -33,7 +33,7 @@ public class AlunoService extends AbstractService {
 
 		List<AlunoDTO> list = mapper.mapAll(alunoDao.findAll(), AlunoDTO.class);
 		response.setSuccess(true);
-		response.addContent(list);
+		response.addContent("list", list);
 		return response;
 	}
 

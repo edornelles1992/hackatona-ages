@@ -17,6 +17,10 @@ public class AlunoDTO {
 	private String id_curso;
 
 	private String nome;
+	
+	public AlunoDTO() {
+		
+	}
 
 	public AlunoDTO(String matricula, String sugestao, String curso, String id_curso, String nome) {
 		super();

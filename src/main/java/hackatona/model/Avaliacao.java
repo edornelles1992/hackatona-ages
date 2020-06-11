@@ -35,6 +35,10 @@ public class Avaliacao {
 	@JoinColumn(name = "id", insertable = false, updatable = false)
 	private Time time;
 
+	public Avaliacao() {
+		
+	}
+	
 	public Avaliacao(User user, Time time) {
 		super();
 		this.user = user;
