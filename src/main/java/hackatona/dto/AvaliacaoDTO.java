@@ -12,12 +12,12 @@ public class AvaliacaoDTO {
 
 	private Integer inovacao;
 
-	private UserDTO user;
+	private AvaliadorDTO avaliador;
 
 	private TimeDTO time;
-	
+
 	public AvaliacaoDTO() {
-		
+
 	}
 
 	public Integer getId() {
@@ -60,12 +60,12 @@ public class AvaliacaoDTO {
 		this.inovacao = inovacao;
 	}
 
-	public UserDTO getUser() {
-		return user;
+	public AvaliadorDTO getAvaliador() {
+		return avaliador;
 	}
 
-	public void setUser(UserDTO user) {
-		this.user = user;
+	public void setAvaliador(AvaliadorDTO avaliador) {
+		this.avaliador = avaliador;
 	}
 
 	public TimeDTO getTime() {

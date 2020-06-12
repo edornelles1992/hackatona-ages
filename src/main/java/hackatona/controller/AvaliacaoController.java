@@ -39,8 +39,8 @@ public class AvaliacaoController extends AbstractController {
 	 */
 	@RequestMapping(value = "/avaliar", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<HttpResponseDTO> efetuarAvaliacao(@RequestBody AvaliacaoDTO dto) throws Exception {
-		return super.response(avaliacaoService.efetuarAvaliacao(dto), HttpStatus.OK);
+	public ResponseEntity<HttpResponseDTO> efetuarAvaliacao(@RequestParam Integer idUsuario, @RequestBody AvaliacaoDTO dto) throws Exception {
+		return super.response(avaliacaoService.efetuarAvaliacao(idUsuario, dto), HttpStatus.OK);
 	}
 	
 	/**
@@ -74,6 +74,17 @@ public class AvaliacaoController extends AbstractController {
 	@ResponseBody
 	public ResponseEntity<HttpResponseDTO> listarAvaliacoesPorAvaliador(@RequestParam Integer id) throws Exception {
 		return super.response(avaliacaoService.listarAvaliacoesPorAvaliador(id), HttpStatus.OK);
+	}
+	
+	/**
+	 * excluir avaliação
+	 * @return {@link ResponseEntity<HttpResponseDTO>}
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/excluir", method = RequestMethod.DELETE)
+	@ResponseBody
+	public ResponseEntity<HttpResponseDTO> excluirAvaliacao(@RequestParam Integer id) throws Exception {
+		return super.response(avaliacaoService.excluirAvaliacao(id), HttpStatus.OK);
 	}
 
 }

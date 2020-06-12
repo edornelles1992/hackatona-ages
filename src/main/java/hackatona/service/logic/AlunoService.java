@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import hackatona.dao.AlunoDao;
+import hackatona.dao.UserDao;
 import hackatona.domain.Cursos;
 import hackatona.dto.AlunoDTO;
 import hackatona.dto.HttpResponseDTO;
@@ -23,6 +24,9 @@ public class AlunoService extends AbstractService {
 
 	@Autowired
 	private AlunoDao alunoDao;
+	
+	@Autowired
+	private UserDao userDao;
 	
 	@Autowired
 	private AlunoServiceConsumer alunoServiceConsumer;
@@ -52,8 +56,12 @@ public class AlunoService extends AbstractService {
 		return response;
 	}
 
-	public HttpResponseDTO cadastrarAluno(AlunoDTO dto) {
+	public HttpResponseDTO cadastrarAluno(Integer idUsuario, AlunoDTO dto) {
 		this.LogServiceConsumed(this.getClassName(), "cadastrarAluno");
+		
+		if (userDao.findById(idUsuario).get().getPerfil() != 1) {
+			return HttpResponseDTO.fail("Você não possui permissão para cadastrar alunos.");
+		}
 		
 		String erro = ValidationUtils.validarCadastroAluno(dto);
 		

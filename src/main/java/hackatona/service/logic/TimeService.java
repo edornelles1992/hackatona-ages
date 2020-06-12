@@ -1,16 +1,22 @@
 package hackatona.service.logic;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import hackatona.dao.AlunoDao;
+import hackatona.dao.AvaliacaoDao;
 import hackatona.dao.TimeDao;
 import hackatona.dto.HttpResponseDTO;
+import hackatona.dto.NotasDTO;
 import hackatona.dto.TimeDTO;
 import hackatona.model.Aluno;
+import hackatona.model.Avaliacao;
 import hackatona.model.Time;
+import javassist.bytecode.stackmap.TypeData.ClassName;
 
 @Service
 public class TimeService extends AbstractService {
@@ -20,6 +26,9 @@ public class TimeService extends AbstractService {
 
 	@Autowired
 	private AlunoDao alunoDao;
+
+	@Autowired
+	private AvaliacaoDao avaliacaoDao;
 
 	public HttpResponseDTO criarTime(TimeDTO dto) {
 		this.LogServiceConsumed(this.getClassName(), "criarTime");
@@ -36,6 +45,12 @@ public class TimeService extends AbstractService {
 	public HttpResponseDTO excluirTime(Integer id) {
 		this.LogServiceConsumed(this.getClassName(), "excluirTime");
 		try {
+			Time time = this.timeDao.findById(id).get();
+			List<Aluno> alunos = this.alunoDao.findByTime(time);
+			for (Aluno aluno : alunos) {
+				aluno.setTime(null);
+				this.alunoDao.save(aluno);
+			}
 			this.timeDao.deleteById(id);
 			return HttpResponseDTO.success("Time apagado com sucesso!");
 		} catch (Exception e) {
@@ -105,4 +120,50 @@ public class TimeService extends AbstractService {
 		return HttpResponseDTO.fail("Time inválido!");
 	}
 
+	public HttpResponseDTO somarNotasDoTime(Integer id) {
+		this.LogServiceConsumed(this.getClassName(), "somarNotasDoTime");
+
+		Time time = this.timeDao.findById(id).get();
+		List<Avaliacao> avaliacoes = this.avaliacaoDao.findByTime(time);
+
+		NotasDTO dto = this.somaNotas(avaliacoes);		
+		dto.setTimeDTO(this.mapper.map(time, TimeDTO.class));
+		return HttpResponseDTO.success("resultado", dto);
+	}
+
+	private NotasDTO somaNotas(List<Avaliacao> avaliacoes) {
+		NotasDTO dto = new NotasDTO();
+
+		for (Avaliacao ava : avaliacoes) {
+			dto.setInovacao(dto.getInovacao() + (ava.getInovacao() == null ? 0 : ava.getInovacao()));
+			dto.setPitch(dto.getPitch() + (ava.getPitch() == null ? 0 : ava.getPitch()));
+			dto.setProcesso(dto.getProcesso() + (ava.getProcesso() == null ? 0 : ava.getProcesso()));
+			dto.setSoftware(dto.getSoftware() + (ava.getSoftware() == null ? 0 : ava.getSoftware()));
+			dto.setTotal(dto.getInovacao() + dto.getPitch() + dto.getProcesso() + dto.getSoftware());
+			if (ava.getInovacao() != null) dto.setAvaliacoes(dto.getAvaliacoes() + 1);
+		}
+		return dto;
+	}
+
+	/**
+	 * Soma as notas de todos os times e retorna a lista de resultados
+	 * ordenadas pela maior pontuação total.
+	 * @return HttpResponseDTO
+	 */
+	public HttpResponseDTO calcularResultados() {
+		this.LogServiceConsumed(this.getClassName(), "calcularResultados");
+		List<Time> times = this.timeDao.findAll();	
+		List<NotasDTO> notas = new ArrayList<>();
+		
+		for (Time time : times) {
+			List<Avaliacao> avaliacoes = this.avaliacaoDao.findByTime(time);
+			NotasDTO resultado = somaNotas(avaliacoes);	
+			resultado.setTimeDTO(this.mapper.map(time, TimeDTO.class));
+			notas.add(resultado);
+		}
+		
+		notas.sort(Comparator.comparing(NotasDTO::getTotal).reversed());
+		
+		return  HttpResponseDTO.success("resultadoFinal", notas);
+	}
 }

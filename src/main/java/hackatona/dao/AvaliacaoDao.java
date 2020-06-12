@@ -17,4 +17,6 @@ public interface AvaliacaoDao extends CrudRepository<Avaliacao, Integer>, JpaSpe
 	
     @Override
     List<Avaliacao> findAll();
+
+	List<Avaliacao> findByTime(Time time);
 }

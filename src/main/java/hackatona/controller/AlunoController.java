@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -34,8 +35,8 @@ public class AlunoController extends AbstractController {
 	
 	@RequestMapping(value = "/cadastrar", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<HttpResponseDTO> cadastrarAluno(@RequestBody AlunoDTO dto) throws Exception {
-		return super.response(alunoService.cadastrarAluno(dto), HttpStatus.OK);
+	public ResponseEntity<HttpResponseDTO> cadastrarAluno(@RequestParam Integer idUsuario, @RequestBody AlunoDTO dto) throws Exception {
+		return super.response(alunoService.cadastrarAluno(idUsuario, dto), HttpStatus.OK);
 	}	
 
 	@RequestMapping(value = "/importar", method = RequestMethod.POST)

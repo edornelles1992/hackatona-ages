@@ -9,6 +9,7 @@ import hackatona.dao.AvaliacaoDao;
 import hackatona.dao.TimeDao;
 import hackatona.dao.UserDao;
 import hackatona.dto.AvaliacaoDTO;
+import hackatona.dto.AvaliadorDTO;
 import hackatona.dto.HttpResponseDTO;
 import hackatona.model.Avaliacao;
 import hackatona.model.Time;
@@ -52,8 +53,13 @@ public class AvaliacaoService extends AbstractService {
 		return HttpResponseDTO.success("Avaliação criada com sucesso!");
 	}
 
-	public HttpResponseDTO efetuarAvaliacao(AvaliacaoDTO dto) {
+	public HttpResponseDTO efetuarAvaliacao(Integer idUsuario, AvaliacaoDTO dto) {
 		this.LogServiceConsumed(this.getClassName(), "efetuarAvaliacao");
+		
+		if (this.userDao.findById(idUsuario).get().getPerfil() != 2) {
+			return HttpResponseDTO.fail("Você não possui permissão para fazer uma avaliação.");
+		}
+				
 		String erro = ValidationUtils.validarAvaliacao(dto);
 		if (erro != null)
 			HttpResponseDTO.fail(erro);
@@ -68,18 +74,42 @@ public class AvaliacaoService extends AbstractService {
 
 	public HttpResponseDTO buscarAvaliacao(Integer id) {
 		this.LogServiceConsumed(this.getClassName(), "buscarAvaliacao");
-		return HttpResponseDTO.success(mapper.map(this.avaliacaoDao.findById(id).get(), AvaliacaoDTO.class));
+		Avaliacao aval = this.avaliacaoDao.findById(id).get();
+		AvaliacaoDTO dto = mapper.map(aval, AvaliacaoDTO.class);
+		dto.setAvaliador(new AvaliadorDTO(aval.getUser().getId(), aval.getUser().getNome()));
+		return HttpResponseDTO.success(dto);
 	}
 
 	public HttpResponseDTO listarAvaliacoes() {
 		this.LogServiceConsumed(this.getClassName(), "listarAvaliacoes");
-		return HttpResponseDTO.success("list",mapper.mapAll( this.avaliacaoDao.findAll(), AvaliacaoDTO.class));
+		List<Avaliacao> avcs = this.avaliacaoDao.findAll();
+		List<AvaliacaoDTO> dtos = mapper.mapAll(avcs, AvaliacaoDTO.class);
+		mapearAvaliador(avcs, dtos);
+		return HttpResponseDTO.success("list", dtos);
 	}
 	
 	public HttpResponseDTO listarAvaliacoesPorAvaliador(Integer idUsuario) {
 		this.LogServiceConsumed(this.getClassName(), "listarAvaliacoesPorAvaliador");
 		User usuario = userDao.findById(idUsuario).get();
-		return HttpResponseDTO.success("list",mapper.mapAll(this.avaliacaoDao.findByUser(usuario), AvaliacaoDTO.class));
+		List<Avaliacao> avcs = this.avaliacaoDao.findByUser(usuario);
+		List<AvaliacaoDTO> dtos = mapper.mapAll(avcs, AvaliacaoDTO.class);
+		mapearAvaliador(avcs, dtos);
+		return HttpResponseDTO.success("list", dtos);
 	}
 
+	public HttpResponseDTO excluirAvaliacao(Integer id) {
+		this.LogServiceConsumed(this.getClassName(), "excluirTime");
+		try {
+			this.avaliacaoDao.deleteById(id);
+			return HttpResponseDTO.success("Avaliação removida com sucesso!");
+		} catch (Exception e) {
+			return HttpResponseDTO.fail(e.getMessage());
+		}
+	}
+
+	private void mapearAvaliador(List<Avaliacao> avcs, List<AvaliacaoDTO> dtos) {
+		for (int i = 0 ; i < dtos.size(); i++) {
+			dtos.get(i).setAvaliador(new AvaliadorDTO(avcs.get(i).getUser().getId(), avcs.get(i).getUser().getNome()));
+		}
+	}
 }

@@ -62,4 +62,16 @@ public class TimeController extends AbstractController {
 	public ResponseEntity<HttpResponseDTO> validarTime(@RequestParam Integer id) throws Exception {
 		return super.response(timeService.validarTime(id), HttpStatus.OK);
 	}
+	
+	@RequestMapping(value = "/pontuacao", method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<HttpResponseDTO> buscarNotasSomadasPorTime(@RequestParam Integer id) throws Exception {
+		return super.response(timeService.somarNotasDoTime(id), HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/resultado", method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<HttpResponseDTO> buscarNotasSomadasPorTime() throws Exception {
+		return super.response(timeService.calcularResultados(), HttpStatus.OK);
+	}
 }
