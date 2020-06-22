@@ -1,13 +1,17 @@
 package hackatona.dto;
 
+import java.util.List;
+
 public class TimeDTO {
 
 	private Integer id;
 
 	private String nome;
-	
+
+	private List<AlunoDTO> alunos;
+
 	public TimeDTO() {
-		
+
 	}
 
 	public Integer getId() {
@@ -24,6 +28,14 @@ public class TimeDTO {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public List<AlunoDTO> getAlunos() {
+		return alunos;
+	}
+
+	public void setAlunos(List<AlunoDTO> alunos) {
+		this.alunos = alunos;
 	}
 
 }

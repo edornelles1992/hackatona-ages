@@ -10,13 +10,13 @@ import org.springframework.stereotype.Service;
 import hackatona.dao.AlunoDao;
 import hackatona.dao.AvaliacaoDao;
 import hackatona.dao.TimeDao;
+import hackatona.dto.AlunoDTO;
 import hackatona.dto.HttpResponseDTO;
 import hackatona.dto.NotasDTO;
 import hackatona.dto.TimeDTO;
 import hackatona.model.Aluno;
 import hackatona.model.Avaliacao;
 import hackatona.model.Time;
-import javassist.bytecode.stackmap.TypeData.ClassName;
 
 @Service
 public class TimeService extends AbstractService {
@@ -85,12 +85,20 @@ public class TimeService extends AbstractService {
 
 	public HttpResponseDTO listarTimes() {
 		this.LogServiceConsumed(this.getClassName(), "listarTimes");
-		return HttpResponseDTO.success("list", mapper.mapAll(this.timeDao.findAll(), TimeDTO.class));
+		List<TimeDTO> times = mapper.mapAll(this.timeDao.findAll(), TimeDTO.class);
+		for (TimeDTO time : times) {
+			List<Aluno> alunos = this.alunoDao.findByTime(mapper.map(time, Time.class));
+			time.setAlunos(this.mapper.mapAll(alunos, AlunoDTO.class));
+		}
+		return HttpResponseDTO.success("list", times);
 	}
 
 	public HttpResponseDTO buscarTime(Integer id) {
 		this.LogServiceConsumed(this.getClassName(), "buscarTime");
-		return HttpResponseDTO.success(mapper.map(this.timeDao.findById(id).get(), TimeDTO.class));
+		TimeDTO time = mapper.map(this.timeDao.findById(id).get(), TimeDTO.class);
+		List<Aluno> alunos = this.alunoDao.findByTime(mapper.map(time, Time.class));
+		time.setAlunos(this.mapper.mapAll(alunos, AlunoDTO.class));
+		return HttpResponseDTO.success(time);
 	}
 
 	/**
