@@ -134,7 +134,7 @@ public class TimeService extends AbstractService {
 		Time time = this.timeDao.findById(id).get();
 		List<Avaliacao> avaliacoes = this.avaliacaoDao.findByTime(time);
 
-		NotasDTO dto = this.somaNotas(avaliacoes);		
+		NotasDTO dto = this.somaNotas(avaliacoes);
 		dto.setTimeDTO(this.mapper.map(time, TimeDTO.class));
 		return HttpResponseDTO.success("resultado", dto);
 	}
@@ -148,30 +148,35 @@ public class TimeService extends AbstractService {
 			dto.setProcesso(dto.getProcesso() + (ava.getProcesso() == null ? 0 : ava.getProcesso()));
 			dto.setSoftware(dto.getSoftware() + (ava.getSoftware() == null ? 0 : ava.getSoftware()));
 			dto.setTotal(dto.getInovacao() + dto.getPitch() + dto.getProcesso() + dto.getSoftware());
-			if (ava.getInovacao() != null) dto.setAvaliacoes(dto.getAvaliacoes() + 1);
+			if (ava.getInovacao() != null)
+				dto.setAvaliacoes(dto.getAvaliacoes() + 1);
 		}
 		return dto;
 	}
 
 	/**
-	 * Soma as notas de todos os times e retorna a lista de resultados
-	 * ordenadas pela maior pontuação total.
+	 * Soma as notas de todos os times e retorna a lista de resultados ordenadas
+	 * pela maior pontuação total. REGRA: listar somente resultado de times que já
+	 * possuem pelo menos 3 avaliações
+	 * 
 	 * @return HttpResponseDTO
 	 */
 	public HttpResponseDTO calcularResultados() {
 		this.LogServiceConsumed(this.getClassName(), "calcularResultados");
-		List<Time> times = this.timeDao.findAll();	
+		List<Time> times = this.timeDao.findAll();
 		List<NotasDTO> notas = new ArrayList<>();
-		
+
 		for (Time time : times) {
 			List<Avaliacao> avaliacoes = this.avaliacaoDao.findByTime(time);
-			NotasDTO resultado = somaNotas(avaliacoes);	
-			resultado.setTimeDTO(this.mapper.map(time, TimeDTO.class));
-			notas.add(resultado);
+			if (avaliacoes != null && avaliacoes.size() >= 3) {
+				NotasDTO resultado = somaNotas(avaliacoes);
+				resultado.setTimeDTO(this.mapper.map(time, TimeDTO.class));
+				notas.add(resultado);
+			}
 		}
-		
+
 		notas.sort(Comparator.comparing(NotasDTO::getTotal).reversed());
-		
-		return  HttpResponseDTO.success("resultadoFinal", notas);
+
+		return HttpResponseDTO.success("resultadoFinal", notas);
 	}
 }
