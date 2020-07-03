@@ -17,6 +17,7 @@ import hackatona.dto.TimeDTO;
 import hackatona.model.Aluno;
 import hackatona.model.Avaliacao;
 import hackatona.model.Time;
+import hackatona.utility.ObjectMapperUtils;
 
 @Service
 public class TimeService extends AbstractService {
@@ -36,7 +37,7 @@ public class TimeService extends AbstractService {
 		if (dto != null) {
 			if (this.timeDao.findByNome(dto.getNome()) != null)
 				return HttpResponseDTO.fail("Time já cadastrado.");
-			return HttpResponseDTO.success(this.timeDao.save(mapper.map(dto, Time.class)));
+			return HttpResponseDTO.success(this.timeDao.save(ObjectMapperUtils.getInstancia().map(dto, Time.class)));
 		} else {
 			return HttpResponseDTO.fail("Erro ao criar time");
 		}
@@ -85,19 +86,19 @@ public class TimeService extends AbstractService {
 
 	public HttpResponseDTO listarTimes() {
 		this.LogServiceConsumed(this.getClassName(), "listarTimes");
-		List<TimeDTO> times = mapper.mapAll(this.timeDao.findAll(), TimeDTO.class);
+		List<TimeDTO> times = ObjectMapperUtils.getInstancia().mapAll(this.timeDao.findAll(), TimeDTO.class);
 		for (TimeDTO time : times) {
-			List<Aluno> alunos = this.alunoDao.findByTime(mapper.map(time, Time.class));
-			time.setAlunos(this.mapper.mapAll(alunos, AlunoDTO.class));
+			List<Aluno> alunos = this.alunoDao.findByTime(ObjectMapperUtils.getInstancia().map(time, Time.class));
+			time.setAlunos(ObjectMapperUtils.getInstancia().mapAll(alunos, AlunoDTO.class));
 		}
 		return HttpResponseDTO.success("list", times);
 	}
 
 	public HttpResponseDTO buscarTime(Integer id) {
 		this.LogServiceConsumed(this.getClassName(), "buscarTime");
-		TimeDTO time = mapper.map(this.timeDao.findById(id).get(), TimeDTO.class);
-		List<Aluno> alunos = this.alunoDao.findByTime(mapper.map(time, Time.class));
-		time.setAlunos(this.mapper.mapAll(alunos, AlunoDTO.class));
+		TimeDTO time = ObjectMapperUtils.getInstancia().map(this.timeDao.findById(id).get(), TimeDTO.class);
+		List<Aluno> alunos = this.alunoDao.findByTime(ObjectMapperUtils.getInstancia().map(time, Time.class));
+		time.setAlunos(ObjectMapperUtils.getInstancia().mapAll(alunos, AlunoDTO.class));
 		return HttpResponseDTO.success(time);
 	}
 
@@ -135,7 +136,7 @@ public class TimeService extends AbstractService {
 		List<Avaliacao> avaliacoes = this.avaliacaoDao.findByTime(time);
 
 		NotasDTO dto = this.somaNotas(avaliacoes);
-		dto.setTimeDTO(this.mapper.map(time, TimeDTO.class));
+		dto.setTimeDTO(ObjectMapperUtils.getInstancia().map(time, TimeDTO.class));
 		return HttpResponseDTO.success("resultado", dto);
 	}
 
@@ -170,7 +171,7 @@ public class TimeService extends AbstractService {
 			List<Avaliacao> avaliacoes = this.avaliacaoDao.findByTime(time);
 			if (avaliacoes != null && avaliacoes.size() >= 3) {
 				NotasDTO resultado = somaNotas(avaliacoes);
-				resultado.setTimeDTO(this.mapper.map(time, TimeDTO.class));
+				resultado.setTimeDTO(ObjectMapperUtils.getInstancia().map(time, TimeDTO.class));
 				notas.add(resultado);
 			}
 		}

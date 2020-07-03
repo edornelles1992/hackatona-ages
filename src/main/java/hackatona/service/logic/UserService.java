@@ -9,6 +9,7 @@ import hackatona.domain.Parameters;
 import hackatona.dto.HttpResponseDTO;
 import hackatona.dto.UserDTO;
 import hackatona.model.User;
+import hackatona.utility.ObjectMapperUtils;
 import hackatona.utility.ValidationUtils;
 
 /**
@@ -36,7 +37,7 @@ public class UserService extends AbstractService {
 		User user = userDao.findByUsuario(usuario);
 
 		if (user != null) {
-			UserDTO userDTO = mapper.map(user, UserDTO.class);
+			UserDTO userDTO = ObjectMapperUtils.getInstancia().map(user, UserDTO.class);
 			response.setSuccess(true);
 			response.addContent("user", userDTO);
 			return response;

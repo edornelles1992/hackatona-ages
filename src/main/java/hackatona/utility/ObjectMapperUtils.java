@@ -12,17 +12,19 @@ import org.springframework.stereotype.Component;
 @Component
 public class ObjectMapperUtils {
 
+	private static ObjectMapperUtils instance = null;
     private static ModelMapper modelMapper = new ModelMapper();
-
+    
     /**
-     * Model mapper property setting are specified in the following block.
-     * Default property matching strategy is set to Strict see {@link MatchingStrategies}
-     * Custom mappings are added using {@link ModelMapper#addMappings(PropertyMap)}
+     * SINGLETON
      */
-    static {
-        modelMapper = new ModelMapper();
-        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
-    }
+	public static synchronized ObjectMapperUtils getInstancia() {
+		if (instance == null) {
+			instance = new ObjectMapperUtils();
+		}
+		return instance;
+	}
+	
 
     /**
      * Hide from public usage.
@@ -67,5 +69,15 @@ public class ObjectMapperUtils {
     public static <S, D> D map(final S source, D destination) {
         modelMapper.map(source, destination);
         return destination;
+    }
+    
+    /**
+     * Model mapper property setting are specified in the following block.
+     * Default property matching strategy is set to Strict see {@link MatchingStrategies}
+     * Custom mappings are added using {@link ModelMapper#addMappings(PropertyMap)}
+     */
+    static {
+        modelMapper = new ModelMapper();
+        modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
     }
 }

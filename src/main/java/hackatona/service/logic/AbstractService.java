@@ -15,9 +15,6 @@ import hackatona.utility.ObjectMapperUtils;
 public class AbstractService {
 	
 	@Autowired
-	protected ObjectMapperUtils mapper;
-	
-	@Autowired
 	protected Logger logger;
 	
 	/**

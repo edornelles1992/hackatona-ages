@@ -14,6 +14,7 @@ import hackatona.dto.HttpResponseDTO;
 import hackatona.model.Avaliacao;
 import hackatona.model.Time;
 import hackatona.model.User;
+import hackatona.utility.ObjectMapperUtils;
 import hackatona.utility.ValidationUtils;
 
 @Service
@@ -75,7 +76,7 @@ public class AvaliacaoService extends AbstractService {
 	public HttpResponseDTO buscarAvaliacao(Integer id) {
 		this.LogServiceConsumed(this.getClassName(), "buscarAvaliacao");
 		Avaliacao aval = this.avaliacaoDao.findById(id).get();
-		AvaliacaoDTO dto = mapper.map(aval, AvaliacaoDTO.class);
+		AvaliacaoDTO dto = ObjectMapperUtils.getInstancia().map(aval, AvaliacaoDTO.class);
 		dto.setAvaliador(new AvaliadorDTO(aval.getUser().getId(), aval.getUser().getNome()));
 		return HttpResponseDTO.success(dto);
 	}
@@ -83,7 +84,7 @@ public class AvaliacaoService extends AbstractService {
 	public HttpResponseDTO listarAvaliacoes() {
 		this.LogServiceConsumed(this.getClassName(), "listarAvaliacoes");
 		List<Avaliacao> avcs = this.avaliacaoDao.findAll();
-		List<AvaliacaoDTO> dtos = mapper.mapAll(avcs, AvaliacaoDTO.class);
+		List<AvaliacaoDTO> dtos = ObjectMapperUtils.getInstancia().mapAll(avcs, AvaliacaoDTO.class);
 		mapearAvaliador(avcs, dtos);
 		return HttpResponseDTO.success("list", dtos);
 	}
@@ -92,7 +93,7 @@ public class AvaliacaoService extends AbstractService {
 		this.LogServiceConsumed(this.getClassName(), "listarAvaliacoesPorAvaliador");
 		User usuario = userDao.findById(idUsuario).get();
 		List<Avaliacao> avcs = this.avaliacaoDao.findByUser(usuario);
-		List<AvaliacaoDTO> dtos = mapper.mapAll(avcs, AvaliacaoDTO.class);
+		List<AvaliacaoDTO> dtos = ObjectMapperUtils.getInstancia().mapAll(avcs, AvaliacaoDTO.class);
 		mapearAvaliador(avcs, dtos);
 		return HttpResponseDTO.success("list", dtos);
 	}
