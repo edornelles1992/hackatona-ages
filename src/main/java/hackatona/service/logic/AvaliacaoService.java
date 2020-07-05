@@ -29,6 +29,9 @@ public class AvaliacaoService extends AbstractService {
 	@Autowired
 	private TimeDao timeDao;
 
+	@Autowired
+	private TimeService timeService;
+
 	/**
 	 * abrir avaliação para um usuário (avaliador) poder realizar.
 	 * 
@@ -54,13 +57,17 @@ public class AvaliacaoService extends AbstractService {
 		return HttpResponseDTO.success("Avaliação criada com sucesso!");
 	}
 
+	/**
+	 * Efetua uma avaliação, garantindo que o usuário que está fazendo é um
+	 * avaliador.
+	 */
 	public HttpResponseDTO efetuarAvaliacao(Integer idUsuario, AvaliacaoDTO dto) {
 		this.LogServiceConsumed(this.getClassName(), "efetuarAvaliacao");
-		
-		if (this.userDao.findById(idUsuario).get().getPerfil() != 2) {
+
+		if (!this.ehUsuarioAvaliador(idUsuario)) {
 			return HttpResponseDTO.fail("Você não possui permissão para fazer uma avaliação.");
 		}
-				
+
 		String erro = ValidationUtils.validarAvaliacao(dto);
 		if (erro != null)
 			HttpResponseDTO.fail(erro);
@@ -88,7 +95,7 @@ public class AvaliacaoService extends AbstractService {
 		mapearAvaliador(avcs, dtos);
 		return HttpResponseDTO.success("list", dtos);
 	}
-	
+
 	public HttpResponseDTO listarAvaliacoesPorAvaliador(Integer idUsuario) {
 		this.LogServiceConsumed(this.getClassName(), "listarAvaliacoesPorAvaliador");
 		User usuario = userDao.findById(idUsuario).get();
@@ -108,9 +115,46 @@ public class AvaliacaoService extends AbstractService {
 		}
 	}
 
+	public HttpResponseDTO criarTodasAvaliacoes(Integer idUsuario) {
+		this.LogServiceConsumed(this.getClassName(), "criarTodasAvaliacoes");
+		List<Time> times = this.timeDao.findAll();
+		List<User> usuarios = this.userDao.findAll();
+		
+		if (!this.ehUsuarioAdmin(idUsuario)) {
+			return HttpResponseDTO.fail("Você não possui permissão para criar avaliações.");
+		}
+
+		for (Time time : times) {
+			if (timeService.ehValidoParaAvaliar(time)) {
+				this.abrirAvaliacoesPendentes(time, usuarios);
+			}
+		}
+
+		return HttpResponseDTO.success("Avaliações abertas com sucesso!");
+	}
+
+	private void abrirAvaliacoesPendentes(Time time, List<User> usuarios) {
+		for (User usuario : usuarios) {
+			if (this.ehUsuarioAvaliador(usuario.getPerfil())) {
+				Avaliacao aval = this.avaliacaoDao.findByUserAndTime(usuario, time);
+				if (aval == null) {
+					this.avaliacaoDao.save(new Avaliacao(usuario, time));
+				}
+			}
+		}
+	}
+
 	private void mapearAvaliador(List<Avaliacao> avcs, List<AvaliacaoDTO> dtos) {
-		for (int i = 0 ; i < dtos.size(); i++) {
+		for (int i = 0; i < dtos.size(); i++) {
 			dtos.get(i).setAvaliador(new AvaliadorDTO(avcs.get(i).getUser().getId(), avcs.get(i).getUser().getNome()));
 		}
+	}
+
+	private boolean ehUsuarioAvaliador(Integer idUsuario) {
+		return this.userDao.findById(idUsuario).get().getPerfil() == 2;
+	}
+	
+	private boolean ehUsuarioAdmin(Integer idUsuario) {
+		return this.userDao.findById(idUsuario).get().getPerfil() == 1;
 	}
 }

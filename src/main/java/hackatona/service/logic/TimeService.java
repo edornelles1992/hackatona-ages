@@ -115,18 +115,12 @@ public class TimeService extends AbstractService {
 		if (time == null)
 			HttpResponseDTO.fail("Time não encontrado!");
 
-		List<Aluno> alunos = this.alunoDao.findByTime(time);
-
-		if (alunos == null || alunos.isEmpty())
-			HttpResponseDTO.fail("Este time não possui nenhum integrante.");
-
-		Aluno atual = alunos.get(0);
-		for (Aluno aluno : alunos) {
-			if (!atual.getId_curso().equals(aluno.getId_curso()))
-				return HttpResponseDTO.success("Time válido!");
+		if (ehValidoParaAvaliar(time)) {
+			return HttpResponseDTO.success("Time válido!");
+		} else {
+			return HttpResponseDTO.fail("Time inválido!");
 		}
 
-		return HttpResponseDTO.fail("Time inválido!");
 	}
 
 	public HttpResponseDTO somarNotasDoTime(Integer id) {
@@ -179,5 +173,19 @@ public class TimeService extends AbstractService {
 		notas.sort(Comparator.comparing(NotasDTO::getTotal).reversed());
 
 		return HttpResponseDTO.success("resultadoFinal", notas);
+	}
+	
+	public boolean ehValidoParaAvaliar(Time time) {
+		List<Aluno> alunos = this.alunoDao.findByTime(time);
+
+		if (alunos == null || alunos.isEmpty())
+			return false;
+
+		Aluno atual = alunos.get(0);
+		for (Aluno aluno : alunos) {
+			if (!atual.getId_curso().equals(aluno.getId_curso()))
+				return true;
+		}
+		return false;
 	}
 }

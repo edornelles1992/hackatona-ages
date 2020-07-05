@@ -33,6 +33,17 @@ public class AvaliacaoController extends AbstractController {
 	}
 	
 	/**
+	 * Criar avaliação para todos os times aptos a serem avalaidos. 
+	 * @return {@link ResponseEntity<HttpResponseDTO>}
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/abrirAvaliacoes", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<HttpResponseDTO> criarTodasAvaliacoes(@RequestParam Integer idUsuario) throws Exception {
+		return super.response(avaliacaoService.criarTodasAvaliacoes(idUsuario), HttpStatus.OK);
+	}
+	
+	/**
 	 * Efetuar uma avaliação.
 	 * @return {@link ResponseEntity<HttpResponseDTO>}
 	 * @throws Exception
