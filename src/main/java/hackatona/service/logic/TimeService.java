@@ -19,6 +19,9 @@ import hackatona.model.Avaliacao;
 import hackatona.model.Time;
 import hackatona.utility.ObjectMapperUtils;
 
+/**
+ * Fachada - Business Service Facade
+ */
 @Service
 public class TimeService extends AbstractService {
 

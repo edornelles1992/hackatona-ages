@@ -17,6 +17,9 @@ import hackatona.model.User;
 import hackatona.utility.ObjectMapperUtils;
 import hackatona.utility.ValidationUtils;
 
+/**
+ * Fachada - Business Service Facade
+ */
 @Service
 public class AvaliacaoService extends AbstractService {
 
